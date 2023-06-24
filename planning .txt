@@ -1,0 +1,15 @@
+==============>BACKEND<=================
+1) user  model,schema  
+2) login/register/password/forgot password  functionalty
+3) 
+4)
+5)
+
+
+
+==============>FRONTEND<=================
+1) navbar and top navbar with login button  
+2) footer
+3) hero section 
+4) home section
+5) service section
