@@ -1,7 +1,12 @@
 const express = require("express");
 const passport = require("passport");
-const { myProfile, logout } = require("../controllers/userController");
-const { isAuthenticated } = require("../middlewares/auth");
+const {
+  myProfile,
+  logout,
+  getAdminUsers,
+  getAdminStats,
+} = require("../controllers/userController");
+const { isAuthenticated, authorizeAdmin } = require("../middlewares/auth");
 
 const router = express.Router();
 
@@ -24,5 +29,8 @@ router.get("/login", passport.authenticate("google"), (req, res, next) => {
 });
 router.get("/me", isAuthenticated, myProfile);
 router.get("/logout", logout);
+
+router.get("/admin/users", isAuthenticated, authorizeAdmin, getAdminUsers);
+router.get("/admin/stats", isAuthenticated, authorizeAdmin, getAdminStats);
 
 module.exports = router;

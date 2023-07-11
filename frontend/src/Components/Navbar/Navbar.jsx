@@ -61,11 +61,13 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="text-[1rem] font-medium  capitalize flex justify-center items-center p-2 m-2 hover:cursor-pointer">
-            Sign Up/Log In{" "}
-            <HiOutlineUserCircle
-              size={30}
-              className="m-1 hover:cursor-pointer"
-            />
+            <Link to="/login" className="flex items-center">
+              Sign Up/Log In{" "}
+              <HiOutlineUserCircle
+                size={30}
+                className="m-1 hover:cursor-pointer"
+              />
+            </Link>
           </div>
         </div>
         <div
@@ -138,11 +140,13 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="text-[1rem] font-medium  capitalize flex justify-center items-center p-2 m-2 mt-10 hover:cursor-pointer">
-              Sign Up/Log In{" "}
-              <HiOutlineUserCircle
-                size={30}
-                className="m-1 hover:cursor-pointer"
-              />
+              <Link to="/login" className="flex items-center">
+                Sign Up/Log In{" "}
+                <HiOutlineUserCircle
+                  size={30}
+                  className="m-1 hover:cursor-pointer"
+                />
+              </Link>
             </div>
           </div>
         </div>

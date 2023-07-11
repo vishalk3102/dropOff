@@ -11,7 +11,8 @@ import Login from "./Pages/Login/Login";
 import About from "./Pages/About/About";
 import Services from "./Pages/Services/Services";
 import Contact from "./Pages/Contact/Contact";
-import Loader from "./Components/Loader";
+// import Loader from "./Components/Loader";
+import Track from "./Pages/Track/Track";
 const App = () => {
   return (
     <>
@@ -24,6 +25,7 @@ const App = () => {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/services" element={<Services />} />
           <Route exact path="/calculaterate" element={<Rate />} />
+          <Route exact path="/track" element={<Track />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route path="/*" element={<Error />} />

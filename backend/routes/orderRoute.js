@@ -6,11 +6,17 @@ const {
   getOrderDetails,
   getAdminOrders,
   processOrder,
+  placeOrderOnline,
+  paymentVerification,
 } = require("../controllers/orderController");
 
 const router = express.Router();
 
 router.post("/createorder", placeOrder);
+
+router.post("/createorderonline", placeOrderOnline);
+
+router.post("/paymentverification", paymentVerification);
 
 router.get("/myorders", isAuthenticated, getMyOrders);
 router.get("/order/:id", isAuthenticated, getOrderDetails);

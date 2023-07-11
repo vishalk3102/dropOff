@@ -7,7 +7,7 @@ const Rate = () => {
       {" "}
       <MetaData title="Rate" />
       <section id="Rate" className="h-full w-full">
-        <div className="max-w-1200px mx-auto">
+        <div className="max-w-[1200px] mx-auto">
           <h2
             className="text-[#000] text-[2.5rem] font-bold
           text-center uppercase p-2 mt-5"
@@ -19,7 +19,7 @@ const Rate = () => {
               <label className="uppercase text-[0.8rem] font-medium p-1">
                 From :
                 <input
-                  className="w-full text-[1.4rem] capitalize p-2 bg-gray-200"
+                  className="w-full text-[1.4rem] capitalize p-2 bg-gray-200 outline-none"
                   type="text"
                   placeholder=""
                   name="name"
@@ -33,7 +33,7 @@ const Rate = () => {
               <label className="uppercase text-[0.8rem] font-medium p-1">
                 To :
                 <input
-                  className="w-full text-[1.4rem] capitalize p-2 bg-gray-200"
+                  className="w-full text-[1.4rem] capitalize p-2 bg-gray-200 outline-none"
                   type="text"
                   placeholder=""
                   name="name"
@@ -73,7 +73,7 @@ const Rate = () => {
                   No of packages <br /> Max 40
                 </label>
                 <input
-                  className="w-full text-[1.4rem] capitalize py-2 bg-gray-200"
+                  className="w-full text-[1.4rem] capitalize py-2 bg-gray-200 outline-none"
                   type="text"
                   // placeholder="Your Packaging"
                   name="name"
@@ -87,7 +87,7 @@ const Rate = () => {
                   weights per package <br /> Max weight 68kg
                 </label>
                 <input
-                  className="w-full text-[1.4rem] capitalize py-2 bg-gray-200"
+                  className="w-full text-[1.4rem] capitalize py-2 bg-gray-200 outline-none"
                   type="text"
                   name="name"
                   // placeholder="Your Packaging"
@@ -101,7 +101,7 @@ const Rate = () => {
                   Dimensions per package <br /> L × W × H
                 </label>
                 <input
-                  className="w-full text-[1.4rem] capitalize py-2 bg-gray-200"
+                  className="w-full text-[1.4rem] capitalize py-2 bg-gray-200 outline-none"
                   type="text"
                   name="name"
                   // placeholder="Your Packaging"
