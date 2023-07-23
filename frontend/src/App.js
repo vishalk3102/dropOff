@@ -23,11 +23,12 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <TopNavbar />
-        <Navbar />
+        {/* <TopNavbar /> */}
+        {/* <Navbar /> */}
         {/* <Loader /> */}
+        <Dashboard />
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          {/* <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/services" element={<Services />} />
           <Route exact path="/calculaterate" element={<Rate />} />
@@ -35,13 +36,14 @@ const App = () => {
           <Route exact path="/track" element={<Track />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/admin/dashboard" element={<Dashboard />} />
-          <Route exact path="/admin/users" element={<Users />} />
-          <Route exact path="/admin/orders" element={<Orders />} />
-          <Route path="/*" element={<Error />} />
+          <Route exact path="/profile" element={<Profile />} /> */}
+          {/* <Route exact path="/admin" element={<Admin />} /> */}
+          {/* <Route exact path="/admin/dashboard" element={<Dashboard />} /> */}
+          {/* <Route exact path="/admin/users" element={<Users />} />
+          <Route exact path="/admin/orders" element={<Orders />} /> */}
+          {/* <Route path="/*" element={<Error />} /> */}
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );
