@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -20,6 +20,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import MainListItems from "./ListItems";
 import Orders from "./Orders";
 import Users from "./Users";
+import Profile from "../Profile/Profile";
 
 const drawerWidth = 240;
 
@@ -70,6 +71,7 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -109,7 +111,7 @@ const Dashboard = () => {
             </Typography>
             <IconButton color="inherit">
               <Badge color="secondary">
-                <PersonIcon />
+                <PersonIcon onClick={() => navigate("/admin/profile")} />
               </Badge>
             </IconButton>
           </Toolbar>
@@ -147,6 +149,7 @@ const Dashboard = () => {
           <Routes>
             <Route exact path="/admin/users" element={<Users />} />
             <Route exact path="/admin/orders" element={<Orders />} />
+            <Route exact path="/admin/profile" element={<Profile />} />
           </Routes>
         </Box>
       </Box>
