@@ -80,6 +80,9 @@ const Orders = () => {
                     Amount
                   </th>
                   <th className="text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center">
+                    Status
+                  </th>
+                  <th className="text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center">
                     Action
                   </th>
                 </tr>
@@ -108,6 +111,9 @@ const Orders = () => {
                           {val.amount}
                         </td>
                         <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
+                          "shipped"
+                        </td>
+                        <td className="text-[0.7rem] md:text-[1rem] font-normal text-center border border-slate-900 p-1 capitalize">
                           <Link to="#">
                             <AiOutlineEye />
                           </Link>
