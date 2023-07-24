@@ -8,6 +8,7 @@ const {
   processOrder,
   placeOrderOnline,
   paymentVerification,
+  trackOrder,
 } = require("../controllers/orderController");
 
 const router = express.Router();
@@ -20,6 +21,7 @@ router.post("/paymentverification", paymentVerification);
 
 router.get("/myorders", isAuthenticated, getMyOrders);
 router.get("/order/:id", isAuthenticated, getOrderDetails);
+router.get("/track/:id", isAuthenticated, trackOrder);
 
 router.get("/admin/orders", isAuthenticated, getAdminOrders);
 router.get("/admin/order/:id", isAuthenticated, processOrder);

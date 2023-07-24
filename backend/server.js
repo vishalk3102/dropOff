@@ -8,5 +8,7 @@ app.get("/", (req, res, next) => {
 });
 
 const server = app.listen(process.env.PORT, () => {
-  console.log(`server is working  on http://localhost:${4000}`);
+  console.log(
+    `server is working at ${process.env.PORT}, in ${process.env.NODE_ENV} mode`
+  );
 });

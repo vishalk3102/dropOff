@@ -5,8 +5,8 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const instance = require("../razorpay");
 
 exports.placeOrder = catchAsyncError(async (req, res, next) => {
+  const trackingID = Math.floor(Math.random() * 9000) + 1000;
   const {
-    trackingID,
     address_from,
     address_to,
     shippingItems,
@@ -38,8 +38,9 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
 });
 
 exports.placeOrderOnline = async (req, res, next) => {
+  const trackingID = Math.floor(Math.random() * 9000) + 1000;
+
   const {
-    trackingID,
     address_from,
     address_to,
     shippingItems,
@@ -176,5 +177,18 @@ exports.processOrder = catchAsyncError(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Status updated succesfully",
+  });
+});
+
+exports.trackOrder = catchAsyncError(async (req, res, next) => {
+  const order = await Order.findOne(req.params.id);
+
+  if (!order) {
+    return next(new ErrorHandler("Invalid Tracking Id", 404));
+  }
+
+  res.status(200).json({
+    success,
+    order,
   });
 });

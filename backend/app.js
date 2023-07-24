@@ -5,6 +5,7 @@ const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./middlewares/errorMiddleware");
+const cors = require("cors");
 
 dotenv.config({ path: "backend/config/config.env" });
 const app = express();
@@ -15,6 +16,12 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+
+    cookie: {
+      secure: process.env.NODE_ENV === "development" ? false : true,
+      httpOnly: process.env.NODE_ENV === "development" ? false : true,
+      sameSite: process.env.NODE_ENV === "development" ? false : "none",
+    },
   })
 );
 
@@ -26,9 +33,18 @@ app.use(
   })
 );
 
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.enable("trust proxy");
 
 // IMPORTING ROUTES
 const user = require("./routes/userRoute");

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { FaUser } from "react-icons/fa";
+import { FiLogIn } from "react-icons/fi";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated = false }) => {
   const [nav, setNav] = useState(false);
   const menuRef = useRef();
 
@@ -61,12 +62,11 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="text-[1rem] font-medium  capitalize flex justify-center items-center p-2 m-2 hover:cursor-pointer">
-            <Link to="/login" className="flex items-center">
-              Sign Up/Log In{" "}
-              <HiOutlineUserCircle
-                size={30}
-                className="m-1 hover:cursor-pointer"
-              />
+            <Link
+              to={isAuthenticated ? "/me" : "/login"}
+              className="flex items-center"
+            >
+              {isAuthenticated ? <FaUser size={28} /> : <FiLogIn size={28} />}
             </Link>
           </div>
         </div>
@@ -140,12 +140,11 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="text-[1rem] font-medium  capitalize flex justify-center items-center p-2 m-2 mt-10 hover:cursor-pointer">
-              <Link to="/login" className="flex items-center">
-                Sign Up/Log In{" "}
-                <HiOutlineUserCircle
-                  size={30}
-                  className="m-1 hover:cursor-pointer"
-                />
+              <Link
+                to={isAuthenticated ? "/me" : "/login"}
+                className="flex items-center"
+              >
+                {isAuthenticated ? <FaUser size={28} /> : <FiLogIn size={28} />}
               </Link>
             </div>
           </div>

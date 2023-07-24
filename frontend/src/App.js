@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import TopNavbar from "./Components/Navbar/TopNavbar";
@@ -20,13 +22,35 @@ import Orders from "./Pages/Admin/Orders";
 import Users from "./Pages/Admin/Users";
 import MyOrders from "./Pages/Orders/MyOrders";
 import OrderDetails from "./Pages/Orders/OrderDetails";
-
+import { loadUser } from "./Redux/Actions/userAction";
+import toast, { Toaster } from "react-hot-toast";
 const App = () => {
+  const dispatch = useDispatch();
+
+  const { error, message, isAuthenticated, user } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+  }, [dispatch, error, message]);
+
   return (
     <>
       <BrowserRouter>
         <TopNavbar />
-        <Navbar />
+        <Navbar isAuthenticated={isAuthenticated} />
         {/* <Loader /> */}
         {/* <Dashboard /> */}
         <Routes>
@@ -46,6 +70,7 @@ const App = () => {
           <Route path="/*" element={<Error />} />
         </Routes>
         <Footer />
+        <Toaster />
       </BrowserRouter>
     </>
   );
