@@ -2,15 +2,22 @@ import React from "react";
 import MetaData from "../../Components/MetaData";
 import { FcGoogle } from "react-icons/fc";
 import { NavLink } from "react-router-dom";
+import { server } from "../../Redux/Store";
 
 const Login = () => {
+  const loginHandler = () => {
+    window.open(`${server}/googlelogin`, "_self");
+  };
   return (
     <>
       <MetaData title="Login" />
       <section id="Login" className="h-full w-full">
         <div className="w-[100%] h-[100%] max-w-[1200px] mx-auto my-20 p-10">
           <NavLink to="/login">
-            <div className="h-[50px] w-[200px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer mt-10 bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]">
+            <div
+              className="h-[50px] w-[200px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer mt-10 bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]"
+              onClick={loginHandler}
+            >
               Login with
               <span className="p-3">
                 <FcGoogle size={24} />

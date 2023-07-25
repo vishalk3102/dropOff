@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
 const Package = () => {
+  const dispatch = useDispatch();
+  const { shippingItems } = useSelector((state) => state.ship);
+
+  const [length, setLength] = useState(shippingItems.length);
+  const [width, setWidth] = useState(shippingItems.width);
+  const [height, setHeight] = useState(shippingItems.height);
+  const [weight, setWeight] = useState(shippingItems.weight);
+  const [quantity, setQuantity] = useState(shippingItems.quantity);
+
+  useEffect(() => {
+    dispatch({
+      type: "addPackageInfo",
+      payload: { length, width, height, weight, quantity },
+    });
+  }, [dispatch, length, width, height, weight, quantity]);
   return (
     <>
       <Typography variant="h7" gutterBottom>
@@ -18,6 +34,8 @@ const Package = () => {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -28,6 +46,8 @@ const Package = () => {
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -38,6 +58,8 @@ const Package = () => {
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            value={length}
+            onChange={(e) => setLength(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -48,6 +70,8 @@ const Package = () => {
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            value={width}
+            onChange={(e) => setWidth(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -58,6 +82,8 @@ const Package = () => {
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
           />
         </Grid>
       </Grid>

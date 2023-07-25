@@ -31,7 +31,7 @@ const TrackDetails = () => {
               </div>
               <div className="col-span-1 flex items-center justify-between ">
                 <button className="h-[40px] w-[150px] md:h-[40px] md:w-[200px] text-[0.8rem] md:text-[1rem] text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer my-3 bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]">
-                  <Link to={"/orderdetails"}>Order Details</Link>
+                  <Link to={"/order/:id"}>Order Details</Link>
                 </button>
               </div>
             </div>

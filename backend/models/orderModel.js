@@ -11,7 +11,11 @@ const orderSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  address_from: {
+  senderDetails: {
+    name: {
+      type: String,
+      required: true,
+    },
     hNo: {
       type: String,
       required: true,
@@ -38,7 +42,11 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
   },
-  address_to: {
+  receiverDetails: {
+    name: {
+      type: String,
+      required: true,
+    },
     hNo: {
       type: String,
       required: true,
@@ -98,10 +106,7 @@ const orderSchema = new mongoose.Schema({
     ref: "Payment",
   },
   paidAt: Date,
-  itemsPrice: {
-    type: Number,
-    default: 0,
-  },
+
   shippingcharges: {
     type: Number,
     default: 0,
