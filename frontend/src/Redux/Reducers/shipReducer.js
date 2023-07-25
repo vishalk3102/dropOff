@@ -67,4 +67,33 @@ export const shipReducer = createReducer(initialState, {
     state.shippingCharges = action.payload.shippingCharges;
     state.totalAmount = action.payload.totalAmount;
   },
+  emptyState: (state) => {
+    state.senderDetails = {
+      senderName: "",
+      senderHNo: "",
+      senderCity: "",
+      senderState: "",
+      senderCountry: "",
+      senderPinCode: 0,
+      senderPhoneNo: 0,
+    };
+    state.receiverDetails = {
+      receiverName: "",
+      receiverHNo: "",
+      receiverCity: "",
+      receiverState: "",
+      receiverCountry: "",
+      receiverPinCode: 0,
+      receiverPhoneNo: 0,
+    };
+    state.shippingItems = {
+      length: 0,
+      width: 0,
+      height: 0,
+      quantity: 0,
+      weight: 0,
+    };
+    state.shippingCharges = 0;
+    state.totalAmount = 0;
+  },
 });

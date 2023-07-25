@@ -17,13 +17,13 @@ router.post("/createorder", placeOrder);
 
 router.post("/createorderonline", placeOrderOnline);
 
-router.post("/paymentverification", paymentVerification);
+router.post("/paymentverification", isAuthenticated, paymentVerification);
 
 router.get("/myorders", isAuthenticated, getMyOrders);
 router.get("/order/:id", isAuthenticated, getOrderDetails);
 router.get("/track/:id", isAuthenticated, trackOrder);
 
-router.get("/admin/orders", isAuthenticated, getAdminOrders);
-router.get("/admin/order/:id", isAuthenticated, processOrder);
+router.get("/admin/orders", isAuthenticated, authorizeAdmin, getAdminOrders);
+router.get("/admin/order/:id", isAuthenticated, authorizeAdmin, processOrder);
 
 module.exports = router;

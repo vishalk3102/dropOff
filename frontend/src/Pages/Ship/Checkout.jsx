@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,6 +13,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "./AddressForm";
 import Package from "./Package";
 import Summary from "./Summary";
+import PaymentSuccess from "./PaymentSuccess";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { server } from "../../Redux/Store";
+import {
+  createOrder,
+  paymentVerification,
+} from "../../Redux/Actions/orderAction";
 
 const steps = ["Address", "Package", "Summary"];
 
@@ -29,18 +39,128 @@ function getStepContent(step) {
   }
 }
 
+// function to load razorpay checkout script
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 const Checkout = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    senderDetails,
+    receiverDetails,
+    shippingItems,
+    shippingcharges,
+    totalAmount,
+  } = useSelector((state) => state.ship);
+
+  const { message, error } = useSelector((state) => state.order);
+
+  const submitOrderHandler = async (e) => {
+    e.preventDefault();
+
+    dispatch(
+      createOrder(
+        senderDetails,
+        receiverDetails,
+        shippingItems,
+        shippingcharges,
+        totalAmount
+      )
+    );
+
+    // const res = await loadScript(
+    //   "https://checkout.razorpay.com/v1/checkout.js"
+    // );
+
+    // if (!res) {
+    //   alert("Razorpay SDK failed to load. Are you online?");
+    //   return;
+    // }
+
+    // const {
+    //   data: { order, orderOptions },
+    // } = await axios.post(
+    //   `${server}/createorderonline`,
+    //   {
+    //     senderDetails,
+    //     receiverDetails,
+    //     shippingItems,
+    //     shippingcharges,
+    //     totalAmount,
+    //   },
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     withCredentials: true,
+    //   }
+    // );
+    // const options = {
+    //   key: "rzp_test_UpZWBJjZ2chrfa",
+    //   amount: order.amount,
+    //   currency: "INR",
+    //   name: "VISHAL KUMAR",
+    //   description: "DropOff",
+    //   order_id: order.id,
+    //   handler: function (response) {
+    //     alert(response.razorpay_payment_id);
+    //     alert(response.razorpay_order_id);
+    //     alert(response.razorpay_signature);
+
+    //     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+    //       response;
+
+    //     dispatch(
+    //       paymentVerification(
+    //         razorpay_payment_id,
+    //         razorpay_order_id,
+    //         razorpay_signature,
+    //         orderOptions
+    //       )
+    //     );
+    //   },
+    //   theme: {
+    //     color: "#9c003c",
+    //   },
+    // };
+    // var razorPay = new window.Razorpay(options);
+    // razorPay.open();
   };
+
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+      dispatch({ type: "emptyState" });
+      navigate("/paymentsuccess");
+    }
+    if (error) {
+      toast.error(message);
+      dispatch({ type: "clearError" });
+    }
+  }, [dispatch, navigate, error, message]);
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+  const handleNext = async () => {
+    setActiveStep(activeStep + 1);
   };
 
   return (
@@ -72,14 +192,7 @@ const Checkout = () => {
           </Stepper>
           {activeStep === steps.length ? (
             <>
-              <Typography variant="h5" gutterBottom>
-                Thank you for your order.
-              </Typography>
-              <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order
-                confirmation, and will send you an update when your order has
-                shipped.
-              </Typography>
+              <PaymentSuccess />
             </>
           ) : (
             <>
@@ -90,14 +203,23 @@ const Checkout = () => {
                     Back
                   </Button>
                 )}
-
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                </Button>
+                {activeStep === steps.length - 1 ? (
+                  <Button
+                    variant="contained"
+                    onClick={submitOrderHandler}
+                    sx={{ mt: 3, ml: 1 }}
+                  >
+                    Place order
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 3, ml: 1 }}
+                  >
+                    Next
+                  </Button>
+                )}
               </Box>
             </>
           )}

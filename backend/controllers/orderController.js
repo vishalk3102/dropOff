@@ -3,15 +3,14 @@ const Payment = require("../models/paymentModel");
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const ErrorHandler = require("../utils/ErrorHandler");
 const instance = require("../razorpay");
+const crypto = require("crypto");
 
 exports.placeOrder = catchAsyncError(async (req, res, next) => {
   const trackingID = Math.floor(Math.random() * 9000) + 1000;
   const {
-    address_from,
-    address_to,
+    senderDetails,
+    receiverDetails,
     shippingItems,
-    paymentMethod,
-    itemsPrice,
     shippingcharges,
     totalAmount,
   } = req.body;
@@ -20,11 +19,9 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
 
   const orderOptions = {
     trackingID,
-    address_from,
-    address_to,
+    senderDetails,
+    receiverDetails,
     shippingItems,
-    paymentMethod,
-    itemsPrice,
     shippingcharges,
     totalAmount,
     user,
@@ -37,28 +34,24 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.placeOrderOnline = async (req, res, next) => {
+exports.placeOrderOnline = catchAsyncError(async (req, res, next) => {
   const trackingID = Math.floor(Math.random() * 9000) + 1000;
 
   const {
-    address_from,
-    address_to,
+    senderDetails,
+    receiverDetails,
     shippingItems,
-    paymentMethod,
-    itemsPrice,
     shippingcharges,
     totalAmount,
   } = req.body;
 
-  const user = "req.user._id";
+  const user = req.user._id;
 
   const orderOptions = {
     trackingID,
-    address_from,
-    address_to,
+    senderDetails,
+    receiverDetails,
     shippingItems,
-    paymentMethod,
-    itemsPrice,
     shippingcharges,
     totalAmount,
     user,
@@ -75,7 +68,7 @@ exports.placeOrderOnline = async (req, res, next) => {
     order,
     orderOptions,
   });
-};
+});
 
 exports.paymentVerification = catchAsyncError(async (req, res, next) => {
   const {
@@ -85,16 +78,16 @@ exports.paymentVerification = catchAsyncError(async (req, res, next) => {
     orderOptions,
   } = req.body;
 
-  // const body = razorpay_order_id + "|" + razorpay_payment_id;
+  const body = razorpay_order_id + "|" + razorpay_payment_id;
 
-  // const expectedSignature = crypto
-  //   .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
-  //   .update(body)
-  //   .digest("hex");
+  const expectedSignature = crypto
+    .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
+    .update(body)
+    .digest("hex");
 
-  // const isAuthentic = expectedSignature === razorpay_signature;
+  const isAuthentic = expectedSignature === razorpay_signature;
 
-  const isAuthentic = true;
+  // const isAuthentic = true;
 
   if (isAuthentic) {
     const payment = await Payment.create({
@@ -105,7 +98,6 @@ exports.paymentVerification = catchAsyncError(async (req, res, next) => {
 
     await Order.create({
       ...orderOptions,
-      user: "req.user._id",
       paidAt: new Date(Date.now()),
       paymentInfo: payment._id,
     });
@@ -121,7 +113,7 @@ exports.paymentVerification = catchAsyncError(async (req, res, next) => {
 
 exports.getMyOrders = catchAsyncError(async (req, res, next) => {
   const orders = await Order.find({
-    user: "req.user._id",
+    user: req.user._id,
   }).populate("user", "name");
   res.status(200).json({
     success: true,

@@ -25,6 +25,7 @@ import OrderDetails from "./Pages/Orders/OrderDetails";
 import { loadUser } from "./Redux/Actions/userAction";
 import toast, { Toaster } from "react-hot-toast";
 import { ProtectedRoute } from "protected-route-react";
+import PaymentSuccess from "./Pages/Ship/PaymentSuccess";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ const App = () => {
           <Route exact path="/calculaterate" element={<Rate />} />
           <Route exact path="/track" element={<Track />} />
           <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/paymentsuccess" element={<Contact />} />
           <Route
             exact
             path="/login"

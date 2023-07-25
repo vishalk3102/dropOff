@@ -96,11 +96,6 @@ const orderSchema = new mongoose.Schema({
     },
   },
 
-  paymentMethod: {
-    type: String,
-    enum: ["Online"],
-    default: "Online",
-  },
   paymentInfo: {
     type: mongoose.Schema.ObjectId,
     ref: "Payment",
