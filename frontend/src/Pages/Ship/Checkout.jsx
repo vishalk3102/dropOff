@@ -19,10 +19,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../Redux/Store";
-import {
-  createOrder,
-  paymentVerification,
-} from "../../Redux/Actions/orderAction";
+import { paymentVerification } from "../../Redux/Actions/orderAction";
 
 const steps = ["Address", "Package", "Summary"];
 
@@ -74,73 +71,63 @@ const Checkout = () => {
   const submitOrderHandler = async (e) => {
     e.preventDefault();
 
-    dispatch(
-      createOrder(
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const {
+      data: { order, orderOptions },
+    } = await axios.post(
+      `${server}/createorderonline`,
+      {
         senderDetails,
         receiverDetails,
         shippingItems,
         shippingcharges,
-        totalAmount
-      )
+        totalAmount,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
     );
+    const options = {
+      key: "rzp_test_UpZWBJjZ2chrfa",
+      amount: order.amount,
+      currency: "INR",
+      name: "VISHAL KUMAR",
+      description: "DropOff",
+      order_id: order.id,
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
 
-    // const res = await loadScript(
-    //   "https://checkout.razorpay.com/v1/checkout.js"
-    // );
+        const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+          response;
 
-    // if (!res) {
-    //   alert("Razorpay SDK failed to load. Are you online?");
-    //   return;
-    // }
-
-    // const {
-    //   data: { order, orderOptions },
-    // } = await axios.post(
-    //   `${server}/createorderonline`,
-    //   {
-    //     senderDetails,
-    //     receiverDetails,
-    //     shippingItems,
-    //     shippingcharges,
-    //     totalAmount,
-    //   },
-    //   {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     withCredentials: true,
-    //   }
-    // );
-    // const options = {
-    //   key: "rzp_test_UpZWBJjZ2chrfa",
-    //   amount: order.amount,
-    //   currency: "INR",
-    //   name: "VISHAL KUMAR",
-    //   description: "DropOff",
-    //   order_id: order.id,
-    //   handler: function (response) {
-    //     alert(response.razorpay_payment_id);
-    //     alert(response.razorpay_order_id);
-    //     alert(response.razorpay_signature);
-
-    //     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
-    //       response;
-
-    //     dispatch(
-    //       paymentVerification(
-    //         razorpay_payment_id,
-    //         razorpay_order_id,
-    //         razorpay_signature,
-    //         orderOptions
-    //       )
-    //     );
-    //   },
-    //   theme: {
-    //     color: "#9c003c",
-    //   },
-    // };
-    // var razorPay = new window.Razorpay(options);
-    // razorPay.open();
+        dispatch(
+          paymentVerification(
+            razorpay_payment_id,
+            razorpay_order_id,
+            razorpay_signature,
+            orderOptions
+          )
+        );
+      },
+      theme: {
+        color: "#9c003c",
+      },
+    };
+    var razorPay = new window.Razorpay(options);
+    razorPay.open();
   };
 
   useEffect(() => {

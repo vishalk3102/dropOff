@@ -11,7 +11,9 @@ export const createOrder =
   ) =>
   async (dispatch) => {
     try {
-      dispatch({ type: "createOrderRequest" });
+      dispatch({
+        type: "createOrderRequest",
+      });
 
       const { data } = await axios.post(
         `${server}/createorder`,
@@ -78,38 +80,38 @@ export const paymentVerification =
     }
   };
 
-// export const getMyOrders = () => async (dispatch) => {
-//   try {
-//     dispatch({ type: "getMyOrderRequest" });
+export const getMyOrders = () => async (dispatch) => {
+  try {
+    dispatch({ type: "getMyOrderRequest" });
 
-//     const { data } = await axios.get(`{server}/myorders`, {
-//       withCredentials: true,
-//     });
+    const { data } = await axios.get(`{server}/myorders`, {
+      withCredentials: true,
+    });
 
-//     dispatch({ type: "getMyOrderSuccess", payload: data.orders });
-//   } catch (error) {
-//     dispatch({
-//       type: "getMyOrderFail",
-//       payload: error.response.data.message,
-//     });
-//   }
-// };
+    dispatch({ type: "getMyOrderSuccess", payload: data.orders });
+  } catch (error) {
+    dispatch({
+      type: "getMyOrderFail",
+      payload: error.response.data.message,
+    });
+  }
+};
 
-// export const getOrderDetails = (id) => async (dispatch) => {
-//   try {
-//     dispatch({
-//       type: "getOrderDetailsRequest",
-//     });
+export const getOrderDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "getOrderDetailsRequest",
+    });
 
-//     const { data } = await axios.get(`{server}/order/${id}`, {
-//       withCredentials: true,
-//     });
+    const { data } = await axios.get(`{server}/order/${id}`, {
+      withCredentials: true,
+    });
 
-//     dispatch({ type: "getOrderDetailsSuccess", payload: data.order });
-//   } catch (error) {
-//     dispatch({
-//       type: "getOrderDetailsFail",
-//       payload: error.response.data.message,
-//     });
-//   }
-// };
+    dispatch({ type: "getOrderDetailsSuccess", payload: data.order });
+  } catch (error) {
+    dispatch({
+      type: "getOrderDetailsFail",
+      payload: error.response.data.message,
+    });
+  }
+};

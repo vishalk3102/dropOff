@@ -66,7 +66,7 @@ const App = () => {
           <Route exact path="/calculaterate" element={<Rate />} />
           <Route exact path="/track" element={<Track />} />
           <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/paymentsuccess" element={<Contact />} />
+          <Route exact path="/paymentsuccess" element={<PaymentSuccess />} />
           <Route
             exact
             path="/login"

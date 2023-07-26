@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -7,14 +7,9 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 
 const Summary = () => {
-  const dispatch = useDispatch();
-  const {
-    senderDetails,
-    receiverDetails,
-    shippingItems,
-    shippingCharges,
-    totalAmount,
-  } = useSelector((state) => state.ship);
+  const { receiverDetails, shippingItems, totalAmount } = useSelector(
+    (state) => state.ship
+  );
 
   const addresses = [
     receiverDetails.hNo,
@@ -30,7 +25,6 @@ const Summary = () => {
         Order Summary
       </Typography>
       <List disablePadding>
-        {/* {products.map((product) => ( */}
         <ListItem sx={{ py: 0, px: 0 }}>
           <ListItemText primary="weight" />
           <Typography variant="body2">{shippingItems.weight}</Typography>
@@ -51,7 +45,6 @@ const Summary = () => {
           <ListItemText primary="height" />
           <Typography variant="body2">{shippingItems.height}</Typography>
         </ListItem>
-        {/* ))} */}
       </List>
       <Grid container>
         <Grid item xs={12} sm={12}>

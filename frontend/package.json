@@ -14,6 +14,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
+    "easyinvoice": "^3.0.23",
     "framer-motion": "^10.12.12",
     "protected-route-react": "^1.0.1",
     "react": "^18.2.0",

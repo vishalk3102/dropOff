@@ -122,13 +122,13 @@ const orderSchema = new mongoose.Schema({
     ],
     default: "Order Placed",
   },
-  Location: {
-    type: String,
-    required: false,
-    trim: true,
-    unique: false,
-    lowercase: true,
-  },
+  // Location: {
+  //   type: String,
+  //   required: false,
+  //   trim: true,
+  //   unique: false,
+  //   lowercase: true,
+  // },
   deliveredAt: Date,
   createdAt: {
     type: Date,
