@@ -1,9 +1,10 @@
 import React from "react";
 import MetaData from "../../Components/MetaData";
-import profile from "../../Assets/profile.jpg";
+// import profile from "../../Assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Redux/Actions/userAction";
 import Loader from "../../Components/Loader";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Profile = () => {
                     className="h-[175px] w-[175px] rounded-[50%]"
                   />
                   <h3 className="text-[1rem] md:text-[1.2rem] font-bold text-center p-2 mt-4 ">
-                    {"user.name"}
+                    {user.name}
                   </h3>
                 </div>
               </div>
@@ -36,10 +37,10 @@ const Profile = () => {
                 <ul className="md:ml-10 p-2 md:p-4 text-center md:text-left">
                   <li className="text-[0.8rem] md:text-[1rem] font-semibold p-2 my-1">
                     User Id :
-                    <span className="font-medium p-1">{"user.googleId"}</span>
+                    <span className="font-medium p-1">{user.googleId}</span>
                   </li>
                   <li className="text-[0.8rem] md:text-[1rem] font-semibold p-2 my-1">
-                    Role :<span className="font-medium p-1">{"user.role"}</span>
+                    Role :<span className="font-medium p-1">{user.role}</span>
                   </li>
                 </ul>
                 <div className="flex flex-col md:flex-row justify-around p-5 md:ml-10">
@@ -49,9 +50,15 @@ const Profile = () => {
                   >
                     Logout
                   </div>
-                  <div className="h-[40px] w-[150px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%] my-1">
-                    Orders
-                  </div>
+                  {user.role === "admin" ? (
+                    <div className="h-[40px] w-[150px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%] my-1">
+                      <Link to={"/admin/dashboard"}>Dashboard</Link>
+                    </div>
+                  ) : (
+                    <div className="h-[40px] w-[150px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%] my-1">
+                      <Link to={"/myroders"}>Orders</Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

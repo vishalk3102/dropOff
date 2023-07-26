@@ -13,9 +13,9 @@ const {
 
 const router = express.Router();
 
-router.post("/createorder", placeOrder);
+router.post("/createorder", isAuthenticated, placeOrder);
 
-router.post("/createorderonline", placeOrderOnline);
+router.post("/createorderonline", isAuthenticated, placeOrderOnline);
 
 router.post("/paymentverification", isAuthenticated, paymentVerification);
 

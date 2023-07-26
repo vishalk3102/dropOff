@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,6 +21,9 @@ import MainListItems from "./ListItems";
 import Orders from "./Orders";
 import Users from "./Users";
 import Profile from "../Profile/Profile";
+import Loader from "../../Components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdminstats } from "../../Redux/Actions/adminAction";
 
 const drawerWidth = 240;
 
@@ -71,88 +74,101 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
+
+  const { loading, userscount, orderscount, totalIncome } = useSelector(
+    (state) => state.admin
+  );
+
+  useEffect(() => {
+    dispatch(getAdminstats());
+  }, [dispatch]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: "24px",
-              backgroundColor: "#000",
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
+      {loading === false ? (
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          <AppBar position="absolute" open={open}>
+            <Toolbar
               sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
+                pr: "24px",
+                backgroundColor: "#000",
               }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={toggleDrawer}
+                sx={{
+                  marginRight: "36px",
+                  ...(open && { display: "none" }),
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                DropOff
+              </Typography>
+              <IconButton color="inherit">
+                <Badge color="secondary">
+                  <PersonIcon onClick={() => navigate("/admin/profile")} />
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer variant="permanent" open={open}>
+            <Toolbar
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                px: [1],
+              }}
             >
-              DropOff
-            </Typography>
-            <IconButton color="inherit">
-              <Badge color="secondary">
-                <PersonIcon onClick={() => navigate("/admin/profile")} />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Toolbar>
+            <Divider />
+            <List component="nav">
+              <MainListItems />
+            </List>
+          </Drawer>
+          <Box
+            component="main"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
+              backgroundColor: (theme) =>
+                theme.palette.mode === "light"
+                  ? theme.palette.grey[100]
+                  : theme.palette.grey[900],
+              flexGrow: 1,
+              height: "100vh",
+              overflow: "auto",
             }}
           >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            <MainListItems />
-          </List>
-        </Drawer>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-          }}
-        >
-          <Routes>
-            <Route exact path="/admin/users" element={<Users />} />
-            <Route exact path="/admin/orders" element={<Orders />} />
-            <Route exact path="/admin/profile" element={<Profile />} />
-          </Routes>
+            <Routes>
+              <Route exact path="/admin/users" element={<Users />} />
+              <Route exact path="/admin/orders" element={<Orders />} />
+              <Route exact path="/admin/profile" element={<Profile />} />
+            </Routes>
+          </Box>
         </Box>
-      </Box>
+      ) : (
+        <Loader />
+      )}
     </ThemeProvider>
   );
 };
