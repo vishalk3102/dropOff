@@ -56,5 +56,5 @@ app.use("/api/v1", order);
 connectPassport();
 
 //USING ERROR MIDDLEWARES
-// app.use(errorMiddleware);
+app.use(errorMiddleware);
 module.exports = app;
