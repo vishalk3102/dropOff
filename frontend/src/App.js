@@ -80,7 +80,7 @@ const App = () => {
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
             <Route exact path="/me" element={<Profile />} />
             <Route exact path="/ship" element={<Ship />} />
-            <Route exact path="/myroders" element={<MyOrders />} />
+            <Route exact path="/myorders" element={<MyOrders />} />
             <Route exact path="/order/:id" element={<OrderDetails />} />
           </Route>
 

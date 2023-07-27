@@ -56,7 +56,7 @@ const Profile = () => {
                     </div>
                   ) : (
                     <div className="h-[40px] w-[150px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%] my-1">
-                      <Link to={"/myroders"}>Orders</Link>
+                      <Link to={"/myorders"}>Orders</Link>
                     </div>
                   )}
                 </div>

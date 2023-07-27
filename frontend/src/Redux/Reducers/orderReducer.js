@@ -57,7 +57,7 @@ export const ordersReducer = createReducer(
     },
     getOrderDetailsFail: (state, action) => {
       state.loading = false;
-      state.order = action.payload;
+      state.error = action.payload;
     },
     clearError: (state) => {
       state.error = null;

@@ -84,7 +84,7 @@ export const getMyOrders = () => async (dispatch) => {
   try {
     dispatch({ type: "getMyOrderRequest" });
 
-    const { data } = await axios.get(`{server}/myorders`, {
+    const { data } = await axios.get(`${server}/myorders`, {
       withCredentials: true,
     });
 
@@ -99,11 +99,9 @@ export const getMyOrders = () => async (dispatch) => {
 
 export const getOrderDetails = (id) => async (dispatch) => {
   try {
-    dispatch({
-      type: "getOrderDetailsRequest",
-    });
+    dispatch({ type: "getOrderDetailsRequest" });
 
-    const { data } = await axios.get(`{server}/order/${id}`, {
+    const { data } = await axios.get(`${server}/order/${id}`, {
       withCredentials: true,
     });
 
