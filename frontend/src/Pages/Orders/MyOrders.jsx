@@ -20,49 +20,6 @@ const MyOrders = () => {
     dispatch(getMyOrders());
   }, [dispatch, error]);
 
-  // const usersData = [
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  // ];
-
   return (
     <>
       <MetaData title="Orders" />
@@ -115,13 +72,14 @@ const MyOrders = () => {
                               {i.orderStatus}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {`${i.length} *${i.width} *${i.height}`}
+                              {i.shippingItems.length}x{i.shippingItems.width}x
+                              {i.shippingItems.height}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {i.weight}
+                              {i.shippingItems.weight}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {i.quantity}
+                              {i.shippingItems.quantity}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
                               {i.totalAmount}

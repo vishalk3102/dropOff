@@ -21,7 +21,7 @@ const OrderDetails = () => {
     <>
       <MetaData title="Orderdetails" />
       <section id="Order-details" className="h-full w-full my-10">
-        {loading === false ? (
+        {loading === false && order !== undefined ? (
           <div className="max-w-[1200px] w-[100%] mx-auto">
             <div className="mb-5">
               <h2

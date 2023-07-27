@@ -14,44 +14,6 @@ const Users = () => {
     dispatch(getAdminUsers());
   }, [dispatch]);
 
-  // const usersData = [
-  //   {
-  //     userId: 1,
-  //     name: "vishal",
-  //     photo: "https://via.placeholder",
-  //     role: "User",
-  //     since: "20-aug-2022",
-  //   },
-  //   {
-  //     userId: 2,
-  //     name: "sahil",
-  //     photo: "https://via.placeholder",
-  //     role: "User",
-  //     since: "20-aug-2022",
-  //   },
-  //   {
-  //     userId: 3,
-  //     name: "shrey",
-  //     photo: "https://via.placeholder",
-  //     role: "User",
-  //     since: "20-aug-2022",
-  //   },
-  //   {
-  //     userId: 4,
-  //     name: "geetansh",
-  //     photo: "https://via.placeholder",
-  //     role: "User",
-  //     since: "20-aug-2022",
-  //   },
-  //   {
-  //     userId: 5,
-  //     name: "saksham",
-  //     photo: "https://via.placeholder",
-  //     role: "User",
-  //     since: "20-aug-2022",
-  //   },
-  // ];
-
   return (
     <>
       <MetaData title="Users" />
@@ -98,7 +60,7 @@ const Users = () => {
                               {i._id}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {i.name}
+                              {i.googleId}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
                               <img src={i.photo} alt="User" />

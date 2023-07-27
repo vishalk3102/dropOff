@@ -27,49 +27,6 @@ const Orders = () => {
     dispatch(getAdminOrders());
   }, [dispatch, message, error]);
 
-  // const usersData = [
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  //   {
-  //     trackingId: 1234,
-  //     name: "vishal",
-  //     address: "djhg rtsfdyws ys",
-  //     quantity: 4,
-  //     weight: 4,
-  //     amount: 1200,
-  //   },
-  // ];
-
   const processOrderHandler = (id) => {
     dispatch(processOrder(id));
   };
@@ -122,19 +79,19 @@ const Orders = () => {
                         <>
                           <tr key={i._id}>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {i.trackingId}
+                              {i.trackingID}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {i.name}
+                              {i.receiverDetails.name}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
                               {"i.receiverDetails"}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {i.quantity}
+                              {i.shippingItems.quantity}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
-                              {i.weight}
+                              {i.shippingItems.weight}
                             </td>
                             <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
                               {i.totalAmount}
