@@ -1,28 +1,28 @@
 const ShippingRates = {
-  Pune: {
-    Mumbai: 1,
-    Bangalore: 2,
-    Chennai: 3,
-    Delhi: 4,
+  pune: {
+    mumbai: 1,
+    bangalore: 2,
+    chennai: 3,
+    delhi: 4,
   },
-  Mumbai: {
-    Pune: 1,
-    Bangalore: 2,
-    Chennai: 3,
-    Delhi: 4,
+  mumbai: {
+    pune: 1,
+    bangalore: 2,
+    chennai: 3,
+    delhi: 4,
   },
-  Bangalore: { Pune: 1, Mumbai: 2, Chennai: 3, Delhi: 4 },
-  Chennai: {
-    Pune: 3,
-    Mumbai: 1,
-    Bangalore: 2,
-    Delhi: 4,
+  bangalore: { pune: 1, mumbai: 2, chennai: 3, delhi: 4 },
+  chennai: {
+    pune: 3,
+    mumbai: 1,
+    bangalore: 2,
+    delhi: 4,
   },
-  Delhi: {
-    Pune: 4,
-    Mumbai: 1,
-    Bangalore: 2,
-    Chennai: 3,
+  delhi: {
+    pune: 4,
+    mumbai: 1,
+    bangalore: 2,
+    chennai: 3,
   },
 };
 
