@@ -4,6 +4,8 @@ const catchAsyncError = require("../middlewares/catchAsyncError");
 const ErrorHandler = require("../utils/ErrorHandler");
 const instance = require("../razorpay");
 const crypto = require("crypto");
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Types;
 
 exports.placeOrder = catchAsyncError(async (req, res, next) => {
   const trackingID = Math.floor(Math.random() * 9000) + 1000;
@@ -173,14 +175,18 @@ exports.processOrder = catchAsyncError(async (req, res, next) => {
 });
 
 exports.trackOrder = catchAsyncError(async (req, res, next) => {
-  const order = await Order.findOne(req.params.id);
+  console.log(req.params.id);
+  console.log(typeof req.params.id);
+  const id = new ObjectId(req.params.id);
 
-  if (!order) {
+  const track = await Order.findOne({ _id: id });
+
+  if (!track) {
     return next(new ErrorHandler("Invalid Tracking Id", 404));
   }
 
   res.status(200).json({
-    success,
-    order,
+    success: true,
+    track,
   });
 });
