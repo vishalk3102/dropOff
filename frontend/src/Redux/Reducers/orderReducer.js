@@ -59,6 +59,17 @@ export const ordersReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
+    trackOrderDetailsRequest: (state) => {
+      state.loading = true;
+    },
+    trackOrderDetailsSuccess: (state, action) => {
+      state.loading = false;
+      state.track = action.payload;
+    },
+    trackOrderDetailsFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     clearError: (state) => {
       state.error = null;
     },

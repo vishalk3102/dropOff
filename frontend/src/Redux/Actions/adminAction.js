@@ -87,3 +87,25 @@ export const processOrder = (id) => async (dispatch) => {
     });
   }
 };
+
+export const deleteUser = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "deleteUserRequest",
+    });
+
+    const { data } = await axios.delete(`${server}/admin/user/${id}`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "deleteUserSuccess",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "deleteUserFail",
+      payload: error.response.data.message,
+    });
+  }
+};

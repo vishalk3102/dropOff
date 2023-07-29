@@ -37,12 +37,7 @@ exports.getAdminStats = catchAsyncError(async (req, res, next) => {
 
   const orders = await Order.find({});
 
-  const placedOrders = orders.filter(
-    (i) => i.orderStatus === "Order Delivered"
-  );
-  const driverAssigned = orders.filter(
-    (i) => i.orderStatus === "Driver Assigned"
-  );
+  const placedOrders = orders.filter((i) => i.orderStatus === "Order Placed");
   const inTransitOrders = orders.filter((i) => i.orderStatus === "In Transit");
   const deliveredOrders = orders.filter(
     (i) => i.orderStatus === "Order Delivered"
@@ -53,16 +48,35 @@ exports.getAdminStats = catchAsyncError(async (req, res, next) => {
     totalIncome += i.totalAmount;
   });
 
+  // console.log(totorders.lengthal);
+  // console.log(placedOrders.length);
+  // console.log(inTransitOrders.length);
+  // console.log(deliveredOrders.length);
+
   res.status(200).json({
     success: true,
     usersCount,
     ordersCount: {
       total: orders.length,
-      placedOrders: placedOrders.length,
-      driverAssigned: driverAssigned.length,
-      placed: inTransitOrders.length,
-      placed: deliveredOrders.length,
+      placed: placedOrders.length,
+      transit: inTransitOrders.length,
+      delivered: deliveredOrders.length,
     },
     totalIncome,
+  });
+});
+
+exports.deleteUser = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    next(new ErrorHandler(`User Doesn't exist with id:${req.params.id}`, 400));
+  }
+  await User.findByIdAndDelete(req.params.id);
+  // await User.deleteOne(user);
+  //
+  res.status(200).json({
+    success: true,
+    message: "User Deleted Successfully",
   });
 });

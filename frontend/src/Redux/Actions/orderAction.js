@@ -113,3 +113,20 @@ export const getOrderDetails = (id) => async (dispatch) => {
     });
   }
 };
+
+export const trackOrderDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "trackOrderDetailsRequest" });
+
+    const { data } = await axios.get(`${server}/track/${id}`, {
+      withCredentials: true,
+    });
+
+    dispatch({ type: "trackOrderDetailsSuccess", payload: data.track });
+  } catch (error) {
+    dispatch({
+      type: "trackOrderDetailsFail",
+      payload: error.response.data.message,
+    });
+  }
+};
