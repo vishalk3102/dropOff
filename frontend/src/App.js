@@ -56,55 +56,69 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <TopNavbar />
-        <Navbar isAuthenticated={isAuthenticated} />
-        {/* <Loader /> */}
-        {/* <Dashboard /> */}
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/about" element={<About />} />
-          <Route exact path="/services" element={<Services />} />
-          <Route exact path="/calculaterate" element={<Rate />} />
-          <Route exact path="/track" element={<Track />} />
-          <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/paymentsuccess" element={<PaymentSuccess />} />
-          <Route exact path="/track/:id" element={<TrackDetails />} />
-          <Route
-            exact
-            path="/login"
-            element={
-              <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/me">
-                <Login />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-            <Route exact path="/me" element={<Profile />} />
-            <Route exact path="/ship" element={<Ship />} />
-            <Route exact path="/myorders" element={<MyOrders />} />
-            <Route exact path="/order/:id" element={<OrderDetails />} />
-          </Route>
-
-          {/* ADMIN ROUTES  */}
-          <Route
-            element={
-              <ProtectedRoute
-                isAuthenticated={isAuthenticated}
-                adminroute={true}
-                isAdmin={user && user.role === "admin"}
-                redirectdmin="/me"
+        {user && user.role === "admin" ? (
+          <>
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute
+                    isAuthenticated={isAuthenticated}
+                    adminroute={true}
+                    isAdmin={user && user.role === "admin"}
+                    redirectdmin="/me"
+                  />
+                }
+              >
+                <Route exact path="/" element={<Dashboard />} />
+                <Route exact path="/admin/users" element={<Users />} />
+                <Route exact path="/admin/orders" element={<Orders />} />
+              </Route>
+            </Routes>
+          </>
+        ) : (
+          <>
+            <TopNavbar />
+            <Navbar isAuthenticated={isAuthenticated} />
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/services" element={<Services />} />
+              <Route exact path="/calculaterate" element={<Rate />} />
+              <Route exact path="/track" element={<Track />} />
+              <Route exact path="/contact" element={<Contact />} />
+              <Route
+                exact
+                path="/paymentsuccess"
+                element={<PaymentSuccess />}
               />
-            }
-          >
-            <Route exact path="/admin/dashboard" element={<Dashboard />} />
-            <Route exact path="/admin/users" element={<Users />} />
-            <Route exact path="/admin/orders" element={<Orders />} />
-          </Route>
+              <Route exact path="/track/:id" element={<TrackDetails />} />
 
-          <Route path="/*" element={<Error />} />
-        </Routes>
-        <Footer />
+              <Route
+                exact
+                path="/login"
+                element={
+                  <ProtectedRoute
+                    isAuthenticated={!isAuthenticated}
+                    redirect="/me"
+                  >
+                    <Login />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                element={<ProtectedRoute isAuthenticated={isAuthenticated} />}
+              >
+                <Route exact path="/me" element={<Profile />} />
+                <Route exact path="/ship" element={<Ship />} />
+                <Route exact path="/myorders" element={<MyOrders />} />
+                <Route exact path="/order/:id" element={<OrderDetails />} />
+              </Route>
+              <Route path="/*" element={<Error />} />
+            </Routes>
+
+            <Footer />
+          </>
+        )}
         <Toaster />
       </BrowserRouter>
     </>
