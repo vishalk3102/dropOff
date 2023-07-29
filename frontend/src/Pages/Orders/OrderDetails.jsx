@@ -141,7 +141,7 @@ const OrderDetails = () => {
                       {" "}
                       Address:{" "}
                       <span className="font-normal">
-                        {`${order.senderDetails.hNo} ${order.senderDetails.hNo} ${order.senderDetails.city} ${order.senderDetails.state}${order.senderDetails.country}${order.senderDetails.pinCode}`}
+                        {`${order.senderDetails.hNo}  ${order.senderDetails.city} ${order.senderDetails.state}${order.senderDetails.country}${order.senderDetails.pinCode}`}
                       </span>
                     </p>
                   </div>
@@ -172,7 +172,7 @@ const OrderDetails = () => {
                       {" "}
                       Address:{" "}
                       <span className="font-normal">
-                        {`${order.receiverDetails.hNo} ${order.receiverDetails.hNo} ${order.receiverDetails.city} ${order.receiverDetails.state}${order.receiverDetails.country}${order.receiverDetails.pinCode}`}
+                        {`${order.receiverDetails.hNo} ${order.receiverDetails.city} ${order.receiverDetails.state}${order.receiverDetails.country}${order.receiverDetails.pinCode}`}
                       </span>
                     </p>
                   </div>
