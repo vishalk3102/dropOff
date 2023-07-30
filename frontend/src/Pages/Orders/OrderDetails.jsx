@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getOrderDetails } from "../../Redux/Actions/orderAction";
 import Loader from "../../Components/Loader";
+import easyinvoice from "easyinvoice";
 
 const OrderDetails = () => {
   const params = useParams();
@@ -17,6 +18,59 @@ const OrderDetails = () => {
     dispatch(getOrderDetails(params.id));
   }, [params.id, dispatch]);
 
+  const downloadInvoice = async (booking) => {
+    const data = {
+      documentTitle: "INVOICE", //Defaults to INVOICE
+
+      settings: {
+        currency: "INR",
+        taxNotation: "vat",
+        marginTop: 25,
+        marginRight: 25,
+        marginLeft: 25,
+        marginBottom: 25,
+        format: "Letter",
+        height: "1000px",
+        width: "500px",
+        orientation: "landscape",
+      },
+      images: {
+        logo: "https://public.easyinvoice.cloud/img/logo_en_original.png",
+      },
+      sender: {
+        company: "DropOff",
+        address: "Sector 215",
+        zip: "412308",
+        city: "Pune",
+        country: "India",
+      },
+      client: {
+        company: `${order.senderDetails.name}`,
+        address: `${order.senderDetails.hNo}`,
+        city: `${order.senderDetails.city}`,
+        state: `${order.senderDetails.state}`,
+        country: `${order.senderDetails.country}`,
+        zip: `${order.senderDetails.pinCode}`,
+      },
+      information: {
+        number: `${params.id}`,
+        date: `${order.createdAt.split("T")[0]}`,
+        "due-date": `${order.createdAt.split("T")[0]}`,
+      },
+
+      products: [
+        {
+          quantity: `${order.shippingItems.quantity}`,
+          description: `Courier Package`,
+          tax: 5,
+          price: `${order.totalAmount}`,
+        },
+      ],
+      bottomNotice: "add message",
+    };
+    const result = await easyinvoice.createInvoice(data);
+    easyinvoice.download(`invoice_1.pdf`, result.pdf);
+  };
   return (
     <>
       <MetaData title="Orderdetails" />
@@ -177,6 +231,14 @@ const OrderDetails = () => {
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className="w-[400px] flex flex-col md:flex-row gap-4 justify-center items-center mx-auto my-10">
+                <button
+                  className="h-[40px] w-[180px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer  bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]"
+                  onClick={() => downloadInvoice()}
+                >
+                  download Invoice
+                </button>
               </div>
             </div>
           </div>
