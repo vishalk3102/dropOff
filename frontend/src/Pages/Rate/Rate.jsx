@@ -15,6 +15,10 @@ const Rate = () => {
   const [show, setShow] = useState(false);
 
   const calculateRate = () => {
+    if (fromAddress === toAddress) {
+      toast.error("From and To adddress can't be same");
+    }
+
     let size = length * width * height;
     let rate = 0;
 
@@ -66,29 +70,39 @@ const Rate = () => {
             <div className="flex flex-col bg-gray-200  border-solid border-2 m-[3px]">
               <label className="uppercase text-[0.8rem] font-medium p-1">
                 From :
-                <input
-                  className="w-full text-[1.4rem] capitalize p-2 bg-gray-200 outline-none"
-                  type="text"
-                  placeholder=""
-                  name="name"
+                <select
+                  id="options"
                   value={fromAddress}
                   onChange={(e) => setFromAddress(e.target.value)}
+                  className="w-full text-[1.4rem]  p-2 bg-gray-200 capitalize outline-none"
                   required
-                />
+                >
+                  <option value="">Select an City</option>
+                  <option value="pune">pune</option>
+                  <option value="mumbai">mumbai</option>
+                  <option value="bangalore">bangalore</option>
+                  <option value="chennai">chennai</option>
+                  <option value="delhi">delhi</option>
+                </select>
               </label>
             </div>
             <div className="flex flex-col bg-gray-200  border-solid border-2 m-[3px]">
               <label className="uppercase text-[0.8rem] font-medium p-1">
                 To :
-                <input
-                  className="w-full text-[1.4rem] capitalize p-2 bg-gray-200 outline-none"
-                  type="text"
-                  placeholder=""
-                  name="name"
+                <select
+                  id="options"
                   value={toAddress}
                   onChange={(e) => setToAddress(e.target.value)}
+                  className="w-full text-[1.4rem]  p-2 bg-gray-200 capitalize outline-none"
                   required
-                />
+                >
+                  <option value="">Select an City</option>
+                  <option value="pune">pune</option>
+                  <option value="mumbai">mumbai</option>
+                  <option value="bangalore">bangalore</option>
+                  <option value="chennai">chennai</option>
+                  <option value="delhi">delhi</option>
+                </select>
               </label>
             </div>
           </div>
