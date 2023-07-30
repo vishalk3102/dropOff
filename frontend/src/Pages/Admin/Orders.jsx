@@ -103,7 +103,7 @@ const Orders = () => {
                               <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                                 {i.orderStatus}
                               </td>
-                              <td className="text-[0.7rem] md:text-[1rem] font-normal text-center border border-slate-900 p-1 capitalize flex justify-evenly items-center">
+                              <td className="text-[0.7rem] md:text-[1rem] font-normal text-center border border-slate-900 p-1 capitalize flex justify-evenly items-center ">
                                 <Link to={`/order/${i._id}`} className="p-1">
                                   <AiOutlineEye size={24} />
                                 </Link>

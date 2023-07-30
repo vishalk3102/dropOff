@@ -91,8 +91,8 @@ const App = () => {
                 path="/paymentsuccess"
                 element={<PaymentSuccess />}
               />
-              {/* <Route exact path="/track/:id" element={<TrackDetails />} /> */}
-              <Route exact path="/td" element={<TrackDetails />} />
+              <Route exact path="/track/:id" element={<TrackDetails />} />
+              {/* <Route exact path="/td" element={<TrackDetails />} /> */}
 
               <Route
                 exact

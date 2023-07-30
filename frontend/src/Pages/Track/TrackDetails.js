@@ -7,22 +7,17 @@ import { RiAccountPinCircleFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
 import { trackOrderDetails } from "../../Redux/Actions/orderAction";
-import TrackStepper from "./Stepper";
-import VerticalStepper from "./VerticalStepper";
 
 const TrackDetails = () => {
-  /*  const params = useParams();
+  const [active, setActive] = useState(1);
+  const params = useParams();
   const dispatch = useDispatch();
 
   const { track, loading } = useSelector((state) => state.orders);
 
   useEffect(() => {
     dispatch(trackOrderDetails(params.id));
-  }, [params.id, dispatch]); */
-  // onclick function
-
-  const [active, setActive] = useState(1);
-  const [completed, setcompleted] = useState(1);
+  }, [params.id, dispatch]);
 
   const steps = [
     {
@@ -78,9 +73,6 @@ const TrackDetails = () => {
         setActive(i + 1);
       }
     }
-    /* for (let i = 0; i < active; i++) {
-      setcompleted(i + 1);
-    } */
   }, [active]);
 
   return (

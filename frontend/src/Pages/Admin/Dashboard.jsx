@@ -4,7 +4,7 @@ import SideNavbar from "./SideNavbar";
 import { PieChart, pieArcClasses } from "@mui/x-charts/PieChart";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminstats } from "../../Redux/Actions/adminAction";
+import { getAdminStats } from "../../Redux/Actions/adminAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,12 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    dispatch(getAdminstats());
+    dispatch(getAdminStats());
   }, [dispatch]);
 
+  // console.log(usersCount);
+  // console.log(ordersCount);
+  // console.log(totalIncome);
   return (
     <>
       <Box sx={{ display: "flex" }} className="my-0">

@@ -6,19 +6,13 @@ import { trackOrderDetails } from "../../Redux/Actions/orderAction";
 import { useNavigate } from "react-router-dom";
 
 const Track = () => {
-  const [search, setSearch] = useState("");
+  const [trackingID, setTrackingID] = useState("");
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setSearch(e.target.value);
-  };
-
   const trackHandler = (e) => {
     e.preventDefault();
-    const id = search;
-    navigate(`/track/${id}`);
+    navigate(`/track/${trackingID}`);
     console.log("clicked");
   };
   return (
@@ -48,8 +42,8 @@ const Track = () => {
                   type="number"
                   placeholder="Tracking ID"
                   className="h-[50px] w-[90%] text-[1rem] font-medium border-solid border-2 border-black outline-none p-4"
-                  value={search}
-                  onChange={handleChange}
+                  value={trackingID}
+                  onChange={(e) => setTrackingID(e.target.value)}
                 />
               </div>
               <div className="flex justify-center items-center mt-3">

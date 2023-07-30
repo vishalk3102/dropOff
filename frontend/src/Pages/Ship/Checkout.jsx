@@ -106,9 +106,9 @@ const Checkout = () => {
       description: "DropOff",
       order_id: order.id,
       handler: function (response) {
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
 
         const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
           response;
