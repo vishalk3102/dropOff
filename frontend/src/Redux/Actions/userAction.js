@@ -36,3 +36,35 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: "logoutFail", payload: error.reponse.data.message });
   }
 };
+
+export const submitContactForm =
+  (name, email, phone, message) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "contactFormRequest",
+      });
+
+      const { data } = await axios.post(
+        `${server}/submitform`,
+        {
+          name,
+          email,
+          phone,
+          message,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      dispatch({ type: "contactFormSuccess", payload: data.message });
+    } catch (error) {
+      dispatch({
+        type: "contactFormFail",
+        payload: error.reponse.data.message,
+      });
+    }
+  };

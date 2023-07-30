@@ -1,6 +1,7 @@
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const ErrorHandler = require("../utils/ErrorHandler");
 const User = require("../models/userModel");
+const nodemailer = require("nodemailer");
 
 exports.myProfile = catchAsyncError(async (req, res, next) => {
   res.status(200).json({
@@ -21,6 +22,39 @@ exports.logout = (req, res, next) => {
     res.status(200).json({
       message: "Logged Out",
     });
+  });
+};
+
+exports.submitContactForm = (req, res, next) => {
+  const { name, email, phone, message } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: process.env.EMAIL_SERVICE,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: `"Contact Form" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_USER,
+    subject: "New Contact Form Submission",
+    html: `<h3>Name: ${name}</h3> <br/><p>Email: ${email}</p><br/><p>Phone Nymber: ${phone}</p><br/><p>Message: ${message}</p>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error sending email" });
+    } else {
+      console.log("Email sent: " + info.response);
+      res.status(200).json({ message: "Email sent successfully" });
+    }
+  });
+
+  res.status(200).json({
+    message: "Email sent successfully",
   });
 };
 

@@ -6,6 +6,7 @@ const {
   getAdminUsers,
   getAdminStats,
   deleteUser,
+  submitContactForm,
 } = require("../controllers/userController");
 const { isAuthenticated, authorizeAdmin } = require("../middlewares/auth");
 
@@ -30,6 +31,7 @@ router.get(
 // });
 router.get("/me", isAuthenticated, myProfile);
 router.get("/logout", logout);
+router.get("/submitform", submitContactForm);
 
 router.delete("/admin/user/:id", isAuthenticated, authorizeAdmin, deleteUser);
 router.get("/admin/users", isAuthenticated, authorizeAdmin, getAdminUsers);

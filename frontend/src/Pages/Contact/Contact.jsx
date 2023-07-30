@@ -1,30 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import MetaData from "../../Components/MetaData";
 import { FiSend } from "react-icons/fi";
 import contactImage from "../../Assets/contact-image-1.jpg";
+import { submitContactForm } from "../../Redux/Actions/userAction";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    fullname: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+  const dispatch = useDispatch();
 
-  // function to handle if there is any change in contact form
-  const handleChange = (event) => {
-    let name, value;
-    name = event.target.name;
-    value = event.target.value;
-    console.log(name + ":" + value);
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = () => {
-    console("submitted");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(submitContactForm(name, email, phone, message));
+    console.log("clicked");
   };
 
   return (
@@ -40,7 +32,7 @@ const Contact = () => {
               Contact Us
             </h2>
             <div className=" w-[100%] my-5 mx-auto">
-              <form onSubmit={handleSubmit}>
+              <form>
                 <div className="flex flex-col bg-gray-200  border-solid border-2 rounded-lg  my-[6px]">
                   <label className="capitalize text-[0.8rem] font-medium p-1 ">
                     Full Name :
@@ -48,9 +40,9 @@ const Contact = () => {
                       className="w-full text-[1.4rem] capitalize p-1 bg-gray-200 focus:outline-none focus:shadow-outline"
                       type="text"
                       placeholder=""
-                      name="fullname"
-                      value={formData.fullname}
-                      onChange={handleChange}
+                      name="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       required
                     />
                   </label>
@@ -63,8 +55,8 @@ const Contact = () => {
                       type="email"
                       placeholder=""
                       name="email"
-                      value={formData.email}
-                      onChange={handleChange}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </label>
@@ -77,8 +69,8 @@ const Contact = () => {
                       type="Number"
                       placeholder=""
                       name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       required
                     />
                   </label>
@@ -92,14 +84,15 @@ const Contact = () => {
                     type="text"
                     placeholder=""
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     rows="5"
                   ></textarea>
                 </div>{" "}
                 <button
                   type="submit"
                   className="h-[50px] w-[150px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer my-3 bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]"
+                  onClick={handleSubmit}
                 >
                   Submit
                   <span className="p-1 mx-2">

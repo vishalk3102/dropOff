@@ -62,6 +62,7 @@ const Track = () => {
               </div>
             </div>
           </div>
+          <TrackDetails />
         </div>
       </section>
     </>

@@ -31,6 +31,17 @@ export const authReducer = createReducer(
       state.isAuthenticated = true;
       state.error = action.payload;
     },
+    contactFormRequest: (state) => {
+      state.loading = true;
+    },
+    contactFormSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    contactFormFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
 
     clearError: (state) => {
       state.error = null;
