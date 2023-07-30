@@ -1,7 +1,7 @@
 import React from "react";
 import MetaData from "../../Components/MetaData";
 import { FcGoogle } from "react-icons/fc";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { server } from "../../Redux/Store";
 
 const Login = () => {
@@ -35,7 +35,9 @@ const Login = () => {
               className="text-[#000] text-[0.8rem] md:text-[1rem] font-bold    text-ce
           uppercase p-4  "
             >
-              Customer support
+              <Link to={"/contact"} className="hover:cursor-pointer">
+                Customer support
+              </Link>
             </h2>
           </div>
         </div>

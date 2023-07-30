@@ -1,20 +1,14 @@
 import axios from "axios";
 import { server } from "../Store";
 
-export const getAdminstats = () => async (dispatch) => {
+export const getAdminStats = () => async (dispatch) => {
   try {
-    dispatch({
-      type: "getDashboardStatsRequest",
-    });
+    dispatch({ type: "getDashboardStatsRequest" });
 
     const { data } = await axios.get(`${server}/admin/stats`, {
       withCredentials: true,
     });
-
-    dispatch({
-      type: "getDashboardStatsSuccess",
-      payload: data,
-    });
+    dispatch({ type: "getDashboardStatsSuccess", payload: data });
   } catch (error) {
     dispatch({
       type: "getDashboardStatsFail",

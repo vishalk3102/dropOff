@@ -175,11 +175,9 @@ exports.processOrder = catchAsyncError(async (req, res, next) => {
 });
 
 exports.trackOrder = catchAsyncError(async (req, res, next) => {
-  console.log(req.params.id);
-  console.log(typeof req.params.id);
-  const id = new ObjectId(req.params.id);
-
-  const track = await Order.findOne({ _id: id });
+  const trackingID = req.params.trackingID;
+  console.log(trackingID);
+  const track = await Order.findOne(trackingID).populate("trackingID");
 
   if (!track) {
     return next(new ErrorHandler("Invalid Tracking Id", 404));

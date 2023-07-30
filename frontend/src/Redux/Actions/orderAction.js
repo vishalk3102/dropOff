@@ -114,11 +114,11 @@ export const getOrderDetails = (id) => async (dispatch) => {
   }
 };
 
-export const trackOrderDetails = (id) => async (dispatch) => {
+export const trackOrderDetails = (trackingID) => async (dispatch) => {
   try {
     dispatch({ type: "trackOrderDetailsRequest" });
 
-    const { data } = await axios.get(`${server}/track/${id}`, {
+    const { data } = await axios.get(`${server}/track/${trackingID}`, {
       withCredentials: true,
     });
 

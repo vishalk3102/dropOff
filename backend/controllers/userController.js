@@ -1,6 +1,7 @@
+const User = require("../models/userModel");
+const Order = require("../models/orderModel");
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const ErrorHandler = require("../utils/ErrorHandler");
-const User = require("../models/userModel");
 const nodemailer = require("nodemailer");
 
 exports.myProfile = catchAsyncError(async (req, res, next) => {
@@ -82,10 +83,10 @@ exports.getAdminStats = catchAsyncError(async (req, res, next) => {
     totalIncome += i.totalAmount;
   });
 
-  // console.log(totorders.lengthal);
-  // console.log(placedOrders.length);
-  // console.log(inTransitOrders.length);
-  // console.log(deliveredOrders.length);
+  console.log(orders.length);
+  console.log(placedOrders.length);
+  console.log(inTransitOrders.length);
+  console.log(deliveredOrders.length);
 
   res.status(200).json({
     success: true,
@@ -107,10 +108,11 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
     next(new ErrorHandler(`User Doesn't exist with id:${req.params.id}`, 400));
   }
   await User.findByIdAndDelete(req.params.id);
-  // await User.deleteOne(user);
-  //
+
+  const users = await User.find({});
   res.status(200).json({
     success: true,
+    users,
     message: "User Deleted Successfully",
   });
 });

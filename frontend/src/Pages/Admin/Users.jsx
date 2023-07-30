@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../../Components/MetaData";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -11,6 +11,7 @@ import SideNavbar from "./SideNavbar";
 
 const Users = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { loading, users, error, message } = useSelector(
     (state) => state.admin
@@ -26,10 +27,11 @@ const Users = () => {
       dispatch({ type: "clearError" });
     }
     dispatch(getAdminUsers());
-  }, [dispatch, message, error]);
+  }, [dispatch, message, error, navigate]);
 
   const deleteUserHandler = (id) => {
     dispatch(deleteUser(id));
+    navigate("/admin/users");
   };
   return (
     <>

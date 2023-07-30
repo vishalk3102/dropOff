@@ -35,6 +35,7 @@ router.get("/submitform", submitContactForm);
 
 router.delete("/admin/user/:id", isAuthenticated, authorizeAdmin, deleteUser);
 router.get("/admin/users", isAuthenticated, authorizeAdmin, getAdminUsers);
-router.get("/admin/stats", isAuthenticated, authorizeAdmin, getAdminStats);
+// router.get("/admin/stats", isAuthenticated, authorizeAdmin, getAdminStats);
+router.get("/admin/stats", getAdminStats);
 
 module.exports = router;

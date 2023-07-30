@@ -57,11 +57,16 @@ export const adminReducer = createReducer(
     },
     deleteUserSuccess: (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.message = action.payload.message;
+      state.users = action.payload.users;
     },
     deleteUserFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    deleteUserReset: (state, action) => {
+      state.loading = false;
+      state.isDeleted = false;
     },
 
     clearError: (state) => {
