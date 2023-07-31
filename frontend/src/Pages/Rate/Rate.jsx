@@ -189,8 +189,8 @@ const Rate = () => {
             </div>
           </div>
           {show === true ? (
-            <div className='p-4 my-10'>
-              <div className='h-[70px] w-[50%] text-[1.6rem]  flex justify-center items-center text-[#000] font-semimedium capitalize rounded-md   mx-auto hover:cursor-pointer bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]'>
+            <div className='w-[90%] p-4 my-10 mx-auto'>
+              <div className='h-[70px] w-[100%] text-[1.2rem] md:text-[1.6rem]  flex justify-center items-center text-[#000] font-semimedium capitalize rounded-md   mx-auto hover:cursor-pointer bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]'>
                 Total Rate For Delivery : Rs.
                 <span className='px-1'>{totalRate} </span>
               </div>
