@@ -30,10 +30,10 @@ const MyOrders = () => {
               className="text-[#000] text-[2.5rem] font-bold
               text-center uppercase p-2 mt-5"
             >
-              Orders Stats
+              My orders
             </h2>
-            <div className="">
-              <table class="table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10">
+            <div className="overflow-auto w-[90%] mx-auto">
+              <table className="table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10">
                 <thead>
                   <tr className="w-[100%] border-solid border-2 border-black">
                     <th className="text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400  border border-slate-900 p-3 uppercase text-center">
@@ -64,27 +64,27 @@ const MyOrders = () => {
                     orders.map((i) => {
                       return (
                         <>
-                          <tr key={i._id}>
-                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
+                          <tr key={i}>
+                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                               {i._id}
                             </td>
-                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
+                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                               {i.orderStatus}
                             </td>
-                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
+                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                               {i.shippingItems.length}x{i.shippingItems.width}x
                               {i.shippingItems.height}
                             </td>
-                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
+                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                               {i.shippingItems.weight}
                             </td>
-                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
+                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                               {i.shippingItems.quantity}
                             </td>
-                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-left">
+                            <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                               {i.totalAmount}
                             </td>
-                            <td className="text-[0.7rem] md:text-[1rem] font-normal text-center border border-slate-900 p-1 capitalize">
+                            <td className="text-[0.7rem] md:text-[1rem] font-normal flex justify-center items-center border border-slate-900 p-1 capitalize">
                               <Link to={`/order/${i._id}`}>
                                 <AiOutlineEye />
                               </Link>

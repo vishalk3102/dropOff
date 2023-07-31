@@ -47,8 +47,8 @@ const Users = () => {
               >
                 Users Stats
               </h2>
-              <div className="">
-                <table class="table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10">
+              <div className="overflow-auto">
+                <table className="table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10">
                   <thead>
                     <tr className="border-solid border-2 border-black">
                       <th className="w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400  border border-slate-900 p-3 uppercase text-center">
@@ -76,7 +76,7 @@ const Users = () => {
                       users.map((i) => {
                         return (
                           <>
-                            <tr>
+                            <tr key={i}>
                               <td className="text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize">
                                 {i._id}
                               </td>

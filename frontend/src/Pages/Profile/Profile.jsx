@@ -16,14 +16,14 @@ const Profile = () => {
   return (
     <>
       <MetaData title="Profile" />
-      <section id="Profile" className="w-full h-full mt-10">
+      <section id="Profile" className="w-full h-full">
         {loading === false ? (
-          <div className="max-w-[1200px] w-[100%] h-[100%] mx-auto flex justify-center items-center ">
+          <div className="max-w-[1200px] w-[100%] h-[100%] mx-auto flex justify-center items-center my-20 py-10 ">
             <div className="grid grid-cols-3 w-[80%] md:w-[60%]  border-solid border-2 border-black rounded-[10px] bg-white ">
               <div className="col-span-3 md:col-span-1 flex justify-center items-center">
                 <div className="p-5 my-2">
                   <img
-                    src={"user.photo"}
+                    src={user.photo}
                     alt=""
                     srcset=""
                     className="h-[175px] w-[175px] rounded-[50%]"

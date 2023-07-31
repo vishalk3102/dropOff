@@ -87,7 +87,7 @@ const OrderDetails = () => {
             </div>
             <div className="w-[90%] mx-auto bg-gray-200 border-2 border-solid rounded-[10px]">
               <div className="w-[80%]  mx-auto p-4">
-                <h2 className="text-[1.2rem] md:text-[1.4rem] font-bold text-left capitalize">
+                <h2 className="text-[1.1rem] md:text-[1.4rem] font-bold text-left capitalize">
                   Order Id :
                   <span className="font-semibold uppercase">{params.id}</span>
                 </h2>
@@ -232,7 +232,7 @@ const OrderDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-[400px] flex flex-col md:flex-row gap-4 justify-center items-center mx-auto my-10">
+              <div className="flex justify-center items-center mx-auto my-10">
                 <button
                   className="h-[40px] w-[180px]  flex justify-center items-center text-[#000] font-medium capitalize rounded-md   mx-auto hover:cursor-pointer  bg-gradient-to-r from-[#feb21a] from-[0%] via-[#fedb28] via-[50%] to-[#feb21a] to-[100%]"
                   onClick={() => downloadInvoice()}

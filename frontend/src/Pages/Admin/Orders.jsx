@@ -46,8 +46,8 @@ const Orders = () => {
               >
                 Orders Stats
               </h2>
-              <div className="">
-                <table class="table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10">
+              <div className="overflow-auto">
+                <table className="table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10">
                   <thead>
                     <tr className="w-[100%] border-solid border-2 border-black">
                       <th className="text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400  border border-slate-900 p-3 uppercase text-center">
@@ -81,7 +81,7 @@ const Orders = () => {
                       orders.map((i) => {
                         return (
                           <>
-                            <tr key={i._id}>
+                            <tr key={i}>
                               <td className="text-[0.7rem] md:text-[1rem] font-normal border border-slate-900 p-1 capitalize text-center">
                                 {i.trackingID}
                               </td>
