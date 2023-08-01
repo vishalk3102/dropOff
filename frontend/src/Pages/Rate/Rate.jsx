@@ -74,7 +74,7 @@ const Rate = () => {
                   id='options'
                   value={fromAddress}
                   onChange={e => setFromAddress(e.target.value)}
-                  className='w-full text-[1.4rem]  p-2 bg-gray-200 capitalize outline-none'
+                  className='w-full text-[1.2rem] md:text-[1.4rem]  p-2 bg-gray-200 capitalize outline-none'
                   required
                 >
                   <option value=''>Select an City</option>
@@ -93,7 +93,7 @@ const Rate = () => {
                   id='options'
                   value={toAddress}
                   onChange={e => setToAddress(e.target.value)}
-                  className='w-full text-[1.4rem]  p-2 bg-gray-200 capitalize outline-none'
+                  className='w-full text-[1.2rem] md:text-[1.4rem]  p-2 bg-gray-200 capitalize outline-none'
                   required
                 >
                   <option value=''>Select an City</option>
