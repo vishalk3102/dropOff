@@ -1,70 +1,38 @@
-import axios from "axios";
-import { server } from "../Store";
+import axios from 'axios'
+import { server } from '../Store'
 
-export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async dispatch => {
   try {
     dispatch({
-      type: "loadUserRequest",
-    });
+      type: 'loadUserRequest'
+    })
 
-    const { data } = await axios.get(`${server}/me`, { withCredentials: true });
+    const { data } = await axios.get(`${server}/me`, { withCredentials: true })
 
     dispatch({
-      type: "loadUserSuccess",
-      payload: data.user,
-    });
+      type: 'loadUserSuccess',
+      payload: data.user
+    })
   } catch (error) {
     dispatch({
-      type: "loadUserFail",
-      payload: error.response.data.message,
-    });
+      type: 'loadUserFail',
+      payload: error.response.data.message
+    })
   }
-};
+}
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async dispatch => {
   try {
     dispatch({
-      type: "logoutRequest",
-    });
+      type: 'logoutRequest'
+    })
 
     const { data } = await axios.get(`${server}/logout`, {
-      withCredentials: true,
-    });
+      withCredentials: true
+    })
 
-    dispatch({ type: "logoutSuccess", payload: data.message });
+    dispatch({ type: 'logoutSuccess', payload: data.message })
   } catch (error) {
-    dispatch({ type: "logoutFail", payload: error.reponse.data.message });
+    dispatch({ type: 'logoutFail', payload: error.reponse.data.message })
   }
-};
-
-export const submitContactForm =
-  (name, email, phone, message) => async (dispatch) => {
-    try {
-      dispatch({
-        type: "contactFormRequest",
-      });
-
-      const { data } = await axios.post(
-        `${server}/submitform`,
-        {
-          name,
-          email,
-          phone,
-          message,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-
-      dispatch({ type: "contactFormSuccess", payload: data.message });
-    } catch (error) {
-      dispatch({
-        type: "contactFormFail",
-        payload: error.reponse.data.message,
-      });
-    }
-  };
+}

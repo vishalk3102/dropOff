@@ -1,5 +1,5 @@
-import axios from "axios";
-import { server } from "../Store";
+import axios from 'axios'
+import { server } from '../Store'
 
 export const createOrder =
   (
@@ -9,11 +9,11 @@ export const createOrder =
     shippingcharges,
     totalAmount
   ) =>
-  async (dispatch) => {
+  async dispatch => {
     try {
       dispatch({
-        type: "createOrderRequest",
-      });
+        type: 'createOrderRequest'
+      })
 
       const { data } = await axios.post(
         `${server}/createorder`,
@@ -22,35 +22,35 @@ export const createOrder =
           receiverDetails,
           shippingItems,
           shippingcharges,
-          totalAmount,
+          totalAmount
         },
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json'
           },
-          withCredentials: true,
+          withCredentials: true
         }
-      );
+      )
 
       dispatch({
-        type: "createOrderSuccess",
-        payload: data.message,
-      });
+        type: 'createOrderSuccess',
+        payload: data.message
+      })
     } catch (error) {
       dispatch({
-        type: "createOrderFail",
-        payload: error.response.data.message,
-      });
+        type: 'createOrderFail',
+        payload: error.response.data.message
+      })
     }
-  };
+  }
 
 export const paymentVerification =
   (razorpay_payment_id, razorpay_order_id, razorpay_signature, orderOptions) =>
-  async (dispatch) => {
+  async dispatch => {
     try {
       dispatch({
-        type: "paymentVerificationRequest",
-      });
+        type: 'paymentVerificationRequest'
+      })
 
       const { data } = await axios.post(
         `${server}/paymentverification`,
@@ -58,75 +58,75 @@ export const paymentVerification =
           razorpay_payment_id,
           razorpay_order_id,
           razorpay_signature,
-          orderOptions,
+          orderOptions
         },
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json'
           },
-          withCredentials: true,
+          withCredentials: true
         }
-      );
+      )
 
       dispatch({
-        type: "paymentVerificationSuccess",
-        payload: data.message,
-      });
+        type: 'paymentVerificationSuccess',
+        payload: data.message
+      })
     } catch (error) {
       dispatch({
-        type: "paymentVerificationFail",
-        payload: error.response.data.message,
-      });
+        type: 'paymentVerificationFail',
+        payload: error.response.data.message
+      })
     }
-  };
+  }
 
-export const getMyOrders = () => async (dispatch) => {
+export const getMyOrders = () => async dispatch => {
   try {
-    dispatch({ type: "getMyOrderRequest" });
+    dispatch({ type: 'getMyOrderRequest' })
 
     const { data } = await axios.get(`${server}/myorders`, {
-      withCredentials: true,
-    });
+      withCredentials: true
+    })
 
-    dispatch({ type: "getMyOrderSuccess", payload: data.orders });
+    dispatch({ type: 'getMyOrderSuccess', payload: data.orders })
   } catch (error) {
     dispatch({
-      type: "getMyOrderFail",
-      payload: error.response.data.message,
-    });
+      type: 'getMyOrderFail',
+      payload: error.response.data.message
+    })
   }
-};
+}
 
-export const getOrderDetails = (id) => async (dispatch) => {
+export const getOrderDetails = id => async dispatch => {
   try {
-    dispatch({ type: "getOrderDetailsRequest" });
+    dispatch({ type: 'getOrderDetailsRequest' })
 
     const { data } = await axios.get(`${server}/order/${id}`, {
-      withCredentials: true,
-    });
+      withCredentials: true
+    })
 
-    dispatch({ type: "getOrderDetailsSuccess", payload: data.order });
+    dispatch({ type: 'getOrderDetailsSuccess', payload: data.order })
   } catch (error) {
     dispatch({
-      type: "getOrderDetailsFail",
-      payload: error.response.data.message,
-    });
+      type: 'getOrderDetailsFail',
+      payload: error.response.data.message
+    })
   }
-};
+}
 
-export const trackOrderDetails = (trackingID) => async (dispatch) => {
+export const trackOrderDetails = trackingID => async dispatch => {
   try {
-    dispatch({ type: "trackOrderDetailsRequest" });
+    dispatch({ type: 'trackOrderDetailsRequest' })
 
     const { data } = await axios.get(`${server}/track/${trackingID}`, {
-      withCredentials: true,
-    });
+      withCredentials: true
+    })
 
-    dispatch({ type: "trackOrderDetailsSuccess", payload: data.track });
+    dispatch({ type: 'trackOrderDetailsSuccess', payload: data.track })
   } catch (error) {
     dispatch({
-      type: "trackOrderDetailsFail",
-      payload: error.response.data.message,
-    });
+      type: 'trackOrderDetailsFail',
+      payload: error.response.data.message
+    })
   }
-};
+}

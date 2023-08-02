@@ -1,80 +1,80 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer } from '@reduxjs/toolkit'
 
 export const orderReducer = createReducer(
   {},
   {
-    createOrderRequest: (state) => {
-      state.loading = true;
+    createOrderRequest: state => {
+      state.loading = true
     },
     createOrderSuccess: (state, action) => {
-      state.loading = false;
-      state.message = action.payload;
+      state.loading = false
+      state.message = action.payload
     },
     createOrderFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading = false
+      state.error = action.payload
     },
-    paymentVerificationRequest: (state) => {
-      state.loading = true;
+    paymentVerificationRequest: state => {
+      state.loading = true
     },
     paymentVerificationSuccess: (state, action) => {
-      state.loading = false;
-      state.message = action.payload;
+      state.loading = false
+      state.message = action.payload
     },
     paymentVerificationFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading = false
+      state.error = action.payload
     },
-    clearMessage: (state) => {
-      state.message = null;
+    clearMessage: state => {
+      state.message = null
     },
-    clearError: (state) => {
-      state.error = null;
-    },
+    clearError: state => {
+      state.error = null
+    }
   }
-);
+)
 
 export const ordersReducer = createReducer(
   { orders: [] },
   {
-    getMyOrderRequest: (state) => {
-      state.loading = true;
+    getMyOrderRequest: state => {
+      state.loading = true
     },
     getMyOrderSuccess: (state, action) => {
-      state.loading = false;
-      state.orders = action.payload;
+      state.loading = false
+      state.orders = action.payload
     },
     getMyOrderFail: (state, action) => {
-      state.loading = false;
-      state.orders = action.payload;
+      state.loading = false
+      state.orders = action.payload
     },
-    getOrderDetailsRequest: (state) => {
-      state.loading = true;
+    getOrderDetailsRequest: state => {
+      state.loading = true
     },
     getOrderDetailsSuccess: (state, action) => {
-      state.loading = false;
-      state.order = action.payload;
+      state.loading = false
+      state.order = action.payload
     },
     getOrderDetailsFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading = false
+      state.error = action.payload
     },
-    trackOrderDetailsRequest: (state) => {
-      state.loading = true;
+    trackOrderDetailsRequest: state => {
+      state.loading = true
     },
     trackOrderDetailsSuccess: (state, action) => {
-      state.loading = false;
-      state.track = action.payload;
+      state.loading = false
+      state.track = action.payload
     },
     trackOrderDetailsFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading = false
+      state.error = action.payload
     },
-    clearError: (state) => {
-      state.error = null;
+    clearError: state => {
+      state.error = null
     },
-    clearMessage: (state) => {
-      state.message = null;
-    },
+    clearMessage: state => {
+      state.message = null
+    }
   }
-);
+)

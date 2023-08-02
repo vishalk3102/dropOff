@@ -1,34 +1,34 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer } from '@reduxjs/toolkit'
 
 const initialState = {
   senderDetails: {
-    name: "",
-    hNo: "",
-    city: "",
-    state: "",
-    country: "",
+    name: '',
+    hNo: '',
+    city: '',
+    state: '',
+    country: '',
     pinCode: 0,
-    phoneNo: 0,
+    phoneNo: 0
   },
   receiverDetails: {
-    name: "",
-    hNo: "",
-    city: "",
-    state: "",
-    country: "",
+    name: '',
+    hNo: '',
+    city: '',
+    state: '',
+    country: '',
     pinCode: 0,
-    phoneNo: 0,
+    phoneNo: 0
   },
   shippingItems: {
     length: 0,
     width: 0,
     height: 0,
     quantity: 0,
-    weight: 0,
+    weight: 0
   },
-  shippingCharges: 100,
-  totalAmount: 100,
-};
+  shippingCharges: 0,
+  totalAmount: 0
+}
 
 export const shipReducer = createReducer(initialState, {
   addSenderInfo: (state, action) => {
@@ -39,8 +39,8 @@ export const shipReducer = createReducer(initialState, {
       state: action.payload.senderState,
       country: action.payload.senderCountry,
       pinCode: action.payload.senderPinCode,
-      phoneNo: action.payload.senderPhoneNo,
-    };
+      phoneNo: action.payload.senderPhoneNo
+    }
   },
   addReceiverInfo: (state, action) => {
     state.receiverDetails = {
@@ -50,8 +50,8 @@ export const shipReducer = createReducer(initialState, {
       state: action.payload.receiverState,
       country: action.payload.receiverCountry,
       pinCode: action.payload.receiverPinCode,
-      phoneNo: action.payload.receiverPhoneNo,
-    };
+      phoneNo: action.payload.receiverPhoneNo
+    }
   },
   addPackageInfo: (state, action) => {
     state.shippingItems = {
@@ -59,41 +59,40 @@ export const shipReducer = createReducer(initialState, {
       width: action.payload.width,
       height: action.payload.height,
       quantity: action.payload.quantity,
-      weight: action.payload.weight,
-    };
+      weight: action.payload.weight
+    }
   },
 
   calculatePrice: (state, action) => {
-    state.shippingCharges = action.payload.shippingCharges;
-    state.totalAmount = action.payload.totalAmount;
+    state.totalAmount = action.payload
   },
-  emptyState: (state) => {
+  emptyState: state => {
     state.senderDetails = {
-      name: "",
-      hNo: "",
-      city: "",
-      state: "",
-      country: "",
+      name: '',
+      hNo: '',
+      city: '',
+      state: '',
+      country: '',
       pinCode: 0,
-      phoneNo: 0,
-    };
+      phoneNo: 0
+    }
     state.receiverDetails = {
-      name: "",
-      hNo: "",
-      city: "",
-      state: "",
-      country: "",
+      name: '',
+      hNo: '',
+      city: '',
+      state: '',
+      country: '',
       pinCode: 0,
-      phoneNo: 0,
-    };
+      phoneNo: 0
+    }
     state.shippingItems = {
       length: 0,
       width: 0,
       height: 0,
       quantity: 0,
-      weight: 0,
-    };
-    state.shippingCharges = 0;
-    state.totalAmount = 0;
-  },
-});
+      weight: 0
+    }
+    state.shippingCharges = 0
+    state.totalAmount = 0
+  }
+})
