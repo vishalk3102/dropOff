@@ -4,7 +4,7 @@ const connectDatabase = require("./config/database");
 connectDatabase();
 
 app.get("/", (req, res, next) => {
-  res.send("<h1>hello from backend</h1>;");
+  res.send("<h1>welcome  to DropOff</h1>;");
 });
 
 const server = app.listen(process.env.PORT, () => {
