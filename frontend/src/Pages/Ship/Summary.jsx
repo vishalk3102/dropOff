@@ -34,7 +34,16 @@ const Summary = () => {
         receiverDetails.city
       )
     )
-  }, [dispatch, receiverDetails.city, senderDetails.city])
+  }, [
+    dispatch,
+    receiverDetails.city,
+    senderDetails.city,
+    shippingItems.height,
+    shippingItems.length,
+    shippingItems.quantity,
+    shippingItems.weight,
+    shippingItems.width
+  ])
 
   return (
     <>
