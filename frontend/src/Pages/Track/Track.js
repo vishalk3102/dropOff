@@ -2,20 +2,24 @@ import React, { useState } from 'react'
 import MetaData from '../../Components/MetaData'
 import TrackDetails from './TrackDetails'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { trackOrderDetails } from '../../Redux/Actions/orderAction'
+import { getOrderDetails } from '../../Redux/Actions/orderAction'
 
 const Track = () => {
-  const [trackingID, setTrackingID] = useState('')
+  // const [trackingID, setTrackingID] = useState('')
+  const [id, setId] = useState('')
   const { loading, track } = useSelector(state => state.orders)
 
+  const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const trackHandler = e => {
     e.preventDefault()
-    dispatch(trackOrderDetails(trackingID))
-    navigate(`/track/${trackingID}`)
+    console.log(id)
+    dispatch(trackOrderDetails(id))
+    // navigate(`/track/${id}`)
     console.log('clicked')
   }
   return (
@@ -45,8 +49,9 @@ const Track = () => {
                   type='number'
                   placeholder='Tracking ID'
                   className='h-[50px] w-[90%] text-[1rem] font-medium border-solid border-2 border-black outline-none p-4'
-                  value={trackingID}
-                  onChange={e => setTrackingID(e.target.value)}
+                  // value={trackingID}
+                  value={id}
+                  onChange={e => setId(e.target.value)}
                 />
               </div>
               <div className='flex justify-center items-center mt-3'>
@@ -62,7 +67,7 @@ const Track = () => {
           {/* <div className=''>{loading === false ? <TrackDetails /> : ''}</div> */}
           {/* <TrackDetails /> */}
 
-          {track && <TrackDetails />}
+          {loading === false && track !== undefined ? <TrackDetails /> : ''}
         </div>
       </section>
     </>

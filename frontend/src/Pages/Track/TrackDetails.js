@@ -7,6 +7,7 @@ import { RiAccountPinCircleFill } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../Components/Loader'
 import { trackOrderDetails } from '../../Redux/Actions/orderAction'
+import { getOrderDetails } from '../../Redux/Actions/orderAction'
 
 const TrackDetails = () => {
   const [active, setActive] = useState(1)
@@ -15,9 +16,9 @@ const TrackDetails = () => {
 
   const { track, loading } = useSelector(state => state.orders)
 
-  useEffect(() => {
-    dispatch(trackOrderDetails(params.id))
-  }, [params.id, dispatch])
+  /* useEffect(() => {
+    dispatch(getOrderDetails(params.id))
+  }, [params.id, dispatch]) */
 
   const steps = [
     {
@@ -87,7 +88,7 @@ const TrackDetails = () => {
                     {' '}
                     Order Status :{' '}
                     <span className='text-[0.7rem] md:text-[0.9rem] font-semibold '>
-                      {track.orderStatus}
+                      {'track.orderStatus'}
                     </span>
                   </li>
                   <li className='text-[0.9rem] md:text-[1rem] font-medium capitalize p-1 md:p-2'>
