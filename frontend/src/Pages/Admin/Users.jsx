@@ -1,102 +1,100 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import MetaData from "../../Components/MetaData";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { getAdminUsers, deleteUser } from "../../Redux/Actions/adminAction";
-import Loader from "../../Components/Loader";
-import { toast } from "react-hot-toast";
-import Box from "@mui/material/Box";
-import SideNavbar from "./SideNavbar";
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import MetaData from '../../Components/MetaData'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { getAdminUsers, deleteUser } from '../../Redux/Actions/adminAction'
+import Loader from '../../Components/Loader'
+import { toast } from 'react-hot-toast'
+import Box from '@mui/material/Box'
+import SideNavbar from './SideNavbar'
 
 const Users = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { loading, users, error, message } = useSelector(
-    (state) => state.admin
-  );
+  const { loading, users, error, message } = useSelector(state => state.admin)
 
   useEffect(() => {
     if (message) {
-      toast.success(message);
-      dispatch({ type: "clearMessage" });
+      toast.success(message)
+      dispatch({ type: 'clearMessage' })
     }
     if (error) {
-      toast.error(error);
-      dispatch({ type: "clearError" });
+      toast.error(error)
+      dispatch({ type: 'clearError' })
     }
-    dispatch(getAdminUsers());
-  }, [dispatch, message, error, navigate]);
+    dispatch(getAdminUsers())
+  }, [dispatch, message, error, navigate])
 
-  const deleteUserHandler = (id) => {
-    dispatch(deleteUser(id));
-    navigate("/admin/users");
-  };
+  const deleteUserHandler = id => {
+    dispatch(deleteUser(id))
+    navigate('/admin/users')
+  }
   return (
     <>
-      <MetaData title="Users" />
-      <section id="Orders" className="w-full h-full mt-16">
+      <MetaData title='Users' />
+      <section id='Orders' className='w-full h-full mt-16'>
         {loading === false ? (
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <SideNavbar />
-            <div className="max-w-[1200px] w-[100%] mx-auto my-10">
+            <div className='max-w-[1200px] w-[100%] mx-auto my-10'>
               <h2
-                className="text-[#000] text-[2.5rem] font-bold
-          text-center uppercase p-2 mt-5"
+                className='text-[#000] text-[2.5rem] font-bold
+          text-center uppercase p-2 mt-5'
               >
                 Users Stats
               </h2>
-              <div className="overflow-auto">
-                <table className="table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10">
+              <div className='overflow-auto'>
+                <table className='table-auto border-solid border-2 border-black border-collapse rounded mx-auto my-10'>
                   <thead>
-                    <tr className="border-solid border-2 border-black">
-                      <th className="w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400  border border-slate-900 p-3 uppercase text-center">
+                    <tr className='border-solid border-2 border-black'>
+                      <th className='w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400  border border-slate-900 p-3 uppercase text-center'>
                         User Id
                       </th>
-                      <th className="w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center">
+                      <th className='w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center'>
                         Name
                       </th>
-                      <th className="w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center">
+                      <th className='w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center'>
                         Photo
                       </th>
-                      <th className="w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center">
+                      <th className='w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center'>
                         Role
                       </th>
-                      <th className="w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center">
+                      <th className='w-[100px] md:w-[200px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center'>
                         since
                       </th>
-                      <th className="w-[50px] md:w-[50px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center">
+                      <th className='w-[50px] md:w-[50px] text-[0.8rem] md:text-[1.2rem] font-bold bg-gray-400 border border-slate-900 p-3  uppercase text-center'>
                         Delete
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {users &&
-                      users.map((i) => {
+                      users.map(i => {
                         return (
                           <>
-                            <tr key={i}>
-                              <td className="text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize">
+                            <tr key={i} className='border border-slate-900 '>
+                              <td className='text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize'>
                                 {i._id}
                               </td>
-                              <td className="text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize">
+                              <td className='text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize'>
                                 {i.googleId}
                               </td>
-                              <td className="text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize flex justify-center items-center">
+                              <td className='text-[0.7rem] md:text-[1rem] text-center font-normal  p-1 capitalize flex justify-center items-center'>
                                 <img
                                   src={i.photo}
-                                  alt="User"
-                                  className="w-[30%] rounded-[50%]"
+                                  alt='User'
+                                  className='w-[30%] rounded-[50%]'
                                 />
                               </td>
-                              <td className="text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize">
+                              <td className='text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize'>
                                 {i.role}
                               </td>
-                              <td className="text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize">
-                                {i.createdAt.split("T")[0]}
+                              <td className='text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize'>
+                                {i.createdAt.split('T')[0]}
                               </td>
-                              <td className="text-[0.7rem] md:text-[1rem] text-center font-normal border border-slate-900 p-1 capitalize hover:cursor-pointer">
+                              <td className='text-[0.7rem] md:text-[1rem] text-center font-normal  p-1 capitalize hover:cursor-pointer'>
                                 <button
                                   onClick={() => deleteUserHandler(i._id)}
                                 >
@@ -107,7 +105,7 @@ const Users = () => {
                               </td>
                             </tr>
                           </>
-                        );
+                        )
                       })}
                   </tbody>
                 </table>
@@ -119,7 +117,7 @@ const Users = () => {
         )}
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users

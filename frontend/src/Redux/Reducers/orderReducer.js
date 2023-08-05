@@ -65,10 +65,12 @@ export const ordersReducer = createReducer(
     trackOrderDetailsSuccess: (state, action) => {
       state.loading = false
       state.track = action.payload
+      state.fetched = true
     },
     trackOrderDetailsFail: (state, action) => {
       state.loading = false
       state.error = action.payload
+      state.fetched = false
     },
     clearError: state => {
       state.error = null

@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
-import { AiOutlineShoppingCart, AiFillHome, AiFillCar } from 'react-icons/ai'
+import { AiFillHome, AiFillCar } from 'react-icons/ai'
 import { BsFillBoxFill, BsEnvelopeFill } from 'react-icons/bs'
 import { RiAccountPinCircleFill } from 'react-icons/ri'
-import { useDispatch, useSelector } from 'react-redux'
-import Loader from '../../Components/Loader'
-import { trackOrderDetails } from '../../Redux/Actions/orderAction'
-import { getOrderDetails } from '../../Redux/Actions/orderAction'
+import { useSelector } from 'react-redux'
 
 const TrackDetails = () => {
   const [active, setActive] = useState(1)
-  const params = useParams()
-  const dispatch = useDispatch()
+  // const [date, setDate] = useState(null)
 
-  const { track, loading } = useSelector(state => state.orders)
+  const { track } = useSelector(state => state.orders)
 
-  /* useEffect(() => {
-    dispatch(getOrderDetails(params.id))
-  }, [params.id, dispatch]) */
+  // const getDeliveryDate = () => {
+  // const createdDate = track.createdAt.split('T')[0]
+  // const deliveryDate = new Date(createdDate)
+  // deliveryDate.setDate(deliveryDate.getDate() + 5)
+  // setDate(deliveryDate)
+  // }
 
   const steps = [
     {
@@ -58,7 +55,7 @@ const TrackDetails = () => {
     }
   ]
 
-  const orderStatus = 'In Transit'
+  // const orderStatus ="Order Placed"
 
   useEffect(() => {
     let statusArray = [
@@ -70,16 +67,16 @@ const TrackDetails = () => {
       'Order Delivered'
     ]
     for (let i = 0; i < statusArray.length; i++) {
-      if (statusArray[i] === orderStatus) {
+      if (statusArray[i] === track.orderStatus) {
         setActive(i + 1)
       }
     }
-  }, [active])
+  }, [track.orderStatus])
 
   return (
     <>
       <section id='TrackDetails' className='h-full w-full'>
-        <div className='max-w-[1200px] w-[100%] h-[100vh] mx-auto'>
+        <div className='max-w-[1200px] w-[100%] mx-auto'>
           <div className='w-[90%] mx-auto  border-2 border-solid rounded-[20px]'>
             <div className='grid grid-cols-2 md:grid-cols-3 mt-4'>
               <div className='col-span-1 md:col-span-2 '>
@@ -88,14 +85,14 @@ const TrackDetails = () => {
                     {' '}
                     Order Status :{' '}
                     <span className='text-[0.7rem] md:text-[0.9rem] font-semibold '>
-                      {'track.orderStatus'}
+                      {track.orderStatus}
                     </span>
                   </li>
                   <li className='text-[0.9rem] md:text-[1rem] font-medium capitalize p-1 md:p-2'>
                     {' '}
                     Expected Date :{' '}
                     <span className='text-[0.7rem] md:text-[0.9rem] font-semibold '>
-                      12 July 2023
+                      {track.createdAt.split('T')[0]}
                     </span>
                   </li>
                 </ul>

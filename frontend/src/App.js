@@ -13,7 +13,6 @@ import Login from './Pages/Login/Login'
 import About from './Pages/About/About'
 import Services from './Pages/Services/Services'
 import Contact from './Pages/Contact/Contact'
-// import Loader from "./Components/Loader";
 import Track from './Pages/Track/Track'
 import Ship from './Pages/Ship/Ship'
 import Profile from './Pages/Profile/Profile'
@@ -26,7 +25,6 @@ import { loadUser } from './Redux/Actions/userAction'
 import toast, { Toaster } from 'react-hot-toast'
 import { ProtectedRoute } from 'protected-route-react'
 import PaymentSuccess from './Pages/Ship/PaymentSuccess'
-import TrackDetails from './Pages/Track/TrackDetails'
 
 const App = () => {
   const dispatch = useDispatch()
